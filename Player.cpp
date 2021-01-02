@@ -1,20 +1,42 @@
 #include "Player.h"
-
+#define InitLife 10
 player::player(std::string playername){
-	Name = new std::string;
-	Position = new float;
 	Name = playername;
-	Position=0.0f;//random number in a range
+	Position = 0.0f;
+	Power = 0;
+	Life = 10;
 }
-player::~player(){
-	delete Name;
-	delete Position;
+
+player::~player(){;}
+
+void player::setPosition(float now) {
+	Position = now;
 }
-float player::getPosition(){ return Position;}
-void player::setPosition(float now) {if(!Position) Position = now;}
-std::string player::getName() {return Name;}
-void player::setName(std::string name){ if(!Name) Name = name;}
-int player::getLife(){ return life; }
-int player::getPower(){ return power; }
-void player::setLife(int l){ life = l;}
-void player::setPower(int p){ power=p;}
+
+void player::setName(std::string name){
+	Name = name;
+}
+
+void player::setLife(int l){ 
+	Life = l;
+}
+
+void player::setPower(int p){ 
+	Power=p;
+}
+
+int getPower(){
+	return Power;
+}
+
+int getLife(){
+	return Life;
+}
+
+float getPosition(){
+	return Position;
+}
+
+std::string getName(){
+	return Name;
+}

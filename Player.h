@@ -3,20 +3,22 @@
 #include <string>
 class player{
 	public:
-	 	player(std::string &name);
+	 	player();
 		~player();
+
 		void setPosition(float);
-		float getPosition() ;
 		void setName(std::string);
-		std::string getName() const;
-		int getLife();
-		int getPower();
 		void setLife(int);
 		void setPower(int);
+		float getPosition();
+		int getLife();
+		int getPower;
+		std::string getName();
 	private:
-		float *Position;
-		std::string *Name;
-		int life;
-		int power;	
+		float Position;
+		std::string Name;
+		int Life;
+		int Power;
+		int O_throw;	
 };
 #endif	//PLAYER_H

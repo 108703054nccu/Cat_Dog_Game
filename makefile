@@ -1,7 +1,5 @@
-game.out:main.o Game.o Dog.o Cat.o Player.o 
-	g++ -o game.out main.o Dog.o Cat.o Player.o Game.o Throw_o.o 
-main.o:main.cpp
-	g++ -c main.cpp
+game.out:Game.o Dog.o Cat.o Player.o Throw_o.o
+	g++ main.cpp -o game.out Player.o Dog.o Cat.o Throw_o.o Game.o 
 Game.o:Game.h Game.cpp
 	g++ -c Game.cpp
 Dog.o:Dog.h Dog.cpp

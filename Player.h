@@ -12,7 +12,7 @@ class player{
 		void setPower(int);
 		float getPosition();
 		int getLife();
-		int getPower;
+		int getPower();
 		std::string getName();
 	private:
 		float Position;

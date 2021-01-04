@@ -1,7 +1,7 @@
 #include "Player.h"
 #define InitLife 10
-player::player(std::string playername){
-	Name = playername;
+player::player(){
+	Name = "";
 	Position = 0.0f;
 	Power = 0;
 	Life = 10;
@@ -25,18 +25,18 @@ void player::setPower(int p){
 	Power=p;
 }
 
-int getPower(){
+int player::getPower(){
 	return Power;
 }
 
-int getLife(){
+int player::getLife(){
 	return Life;
 }
 
-float getPosition(){
+float player::getPosition(){
 	return Position;
 }
 
-std::string getName(){
+std::string player::getName(){
 	return Name;
 }

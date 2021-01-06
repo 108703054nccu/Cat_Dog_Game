@@ -34,13 +34,10 @@ class dog:public player{
 	public:
 		dog();
 		~dog();
-		void ShowDog();
 		void setO_PointX(int);
 		void setO_PointY(int);
 		void ShowPic(int,int,bool);
 	private:
-		int P_Height;
-		int P_Width;
 		int O_PointX;
 		int O_PointY;
 		std::string Dog_Pic;

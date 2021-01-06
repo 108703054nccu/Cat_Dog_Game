@@ -34,8 +34,6 @@ class cat:public player{
 		~cat();
 		void ShowPic(int,int,bool);
 	private:
-		int P_Height;
-		int P_Width;
 		int O_PositionX;
 		int O_PositionY;
 		std::string Cat_Pic;

@@ -1,15 +1,10 @@
 #include "Game.h"
-#include "Dog.h"
-
+#include <iostream>
 using namespace std;
 
 
 int main(){
-	dog d("Dog");
-	d.ShowPic(0,0);
-	/*
-	game g;
-	g.ShowGame(0,0);
-	*/
+	game r;
+	r.ShowGame(0,0,status::HITED);
 	return 0;
 }

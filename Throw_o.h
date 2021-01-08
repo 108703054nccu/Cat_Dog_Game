@@ -1,9 +1,10 @@
 #ifndef THROW_O_H
 #define THROW_O_H
+#include "Color_m.h"
 const int StonePip = 2;
 const int StoneHeight = 5;
 const int StoneWidth = 10;
-static char Stone[Stonepip][StoneHeight][StoneWidth] = {{
+static char Stone[StonePip][StoneHeight][StoneWidth+1] = {{
 	"  ******  ",
 	"**********",
 	"**********",
@@ -14,7 +15,7 @@ static char Stone[Stonepip][StoneHeight][StoneWidth] = {{
 	"*     *   ",
 	"  *   *  *",
 	"    *     ",
-	"*    *    *"	
+	"*    *   *"	
 }};
 class throw_o{
 	public:

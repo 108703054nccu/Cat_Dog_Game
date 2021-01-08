@@ -3,6 +3,7 @@
 #include <string>
 #include "Dog.h"
 #include "Cat.h"
+#include "Throw_o.h"
 enum class status{
 	HIT_FRONT,
 	HITED,
@@ -22,6 +23,7 @@ class game{
 	private:
 		dog DogPlayer;
 		cat CatPlayer;
+		stone Stone_o;
 };
 
 

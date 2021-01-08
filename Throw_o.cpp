@@ -37,6 +37,9 @@ stone::stone(){
 
 stone::~stone(){;}
 
-stone::ShowPic(int width,int height,bool ishit){
-	
+void stone::ShowPic(int height,int width,bool ishit){
+	Color::Modifier bgwhite(Color::BG_WHITE);
+	Color::Modifier bgdef(Color::BG_DEFAULT);
+	if(Stone[ishit][height][width] == '*')std::cout<<bgwhite<<" "<<bgdef;
+	else std::cout<<" ";
 }

@@ -5,6 +5,6 @@ using namespace std;
 
 int main(){
 	game r;
-	r.ShowGame(40,0,status::HITED);
+	r.ShowGame(status::HIT_FRONT , 1, 1, character::DOG);
 	return 0;
 }

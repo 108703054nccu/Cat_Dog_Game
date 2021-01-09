@@ -17,19 +17,36 @@ static char Stone[StonePip][StoneHeight][StoneWidth+1] = {{
 	"    *     ",
 	"*    *   *"	
 }};
+const int FishPip = 2;
+const int FishHeight = 5;
+const int FishWidth = 10;
+static char Fish[FishPip][FishHeight][FishWidth+1] = {{
+	"       *  ",
+	"    ******",
+	"  *****   ",
+	" *****    ",
+	" ***      "	
+},{
+	"   *   * *",
+	"*     *   ",
+	"  *   *  *",
+	"    *     ",
+	"*    *   *"	
+}};
+
 class throw_o{
 	public:
 		throw_o();
 		~throw_o();
 		void setWeight(int);
-		void setPosition(int,int);
+		void setOPosition(int,int);
 		int getWeight();
-		int getPositionX();
-		int getPositionY();
+		int getOPositionX();
+		int getOPositionY();
 	private:
 		int Weight;
-		int PositionX;
-		int PositionY;	
+		int OPositionX;
+		int OPositionY;	
 };
 class stone:public throw_o{
 	public:
@@ -37,7 +54,12 @@ class stone:public throw_o{
 		~stone();
 		void ShowPic(int,int,bool);
 	private:
-		int O_PointX;
-		int O_PointY;
+};
+class fish:public throw_o{
+	public:
+		fish();
+		~fish();
+		void ShowPic(int,int,bool);
+	private:
 };
 #endif // THROW_O_H

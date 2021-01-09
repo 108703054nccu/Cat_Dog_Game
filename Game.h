@@ -9,12 +9,17 @@ enum class status{
 	HITED,
 	HIT_BEHIND
 };
+enum class character{
+	DOG,
+	CAT,
+	EMPTY
+};
 class game{
 	public:
 		game();
 		~game();
 		void StartGame();
-		void ShowGame(int , int, status);
+		void ShowGame(status,bool,bool,character);
 		bool IsHit(float,float,int);//target pos, O_throw pos, power, angle 
 		void setDogPosition(float);
 		void setCatPosition(float);
@@ -23,7 +28,8 @@ class game{
 	private:
 		dog DogPlayer;
 		cat CatPlayer;
-		stone Stone_o;
+		stone StoneObject;
+		fish FishObject;
 };
 
 

@@ -16,7 +16,7 @@ game::game(){
 game::~game(){;}
 
 void game::ShowGame( status s, bool isget, bool isshot, character c){
-	int time1=19;
+	int time1=25;
 	if(!isget){
 		for(int y = 0; y<Map_Height; y++){
 			for(int x = 0; x<Map_Width; x++){
@@ -100,34 +100,63 @@ void game::ShowGame( status s, bool isget, bool isshot, character c){
 		if(c == character::DOG){
 			switch(s){
 				case status::HIT_FRONT:
-				for(int i=0; i<time1; i++){
-					for(int y = 0; y<Map_Height; y++){
-						for(int x = 0; x<Map_Width; x++){
-							if(x>=DogPlayer.getOPositionX() && x<DogPlayer.getOPositionX()+DogWidth){
-								if(y>=DogPlayer.getOPositionY() && y<DogPlayer.getOPositionY()+DogHeight){
-									DogPlayer.ShowPic(y-DogPlayer.getOPositionY(), x-DogPlayer.getOPositionX(), 0);
-								}		
-								else std::cout<<" ";
-							}
-							else if(x>=StoneObject.getOPositionX()+i&& x<StoneObject.getOPositionX()+StoneWidth+i){
-								if(y>=StoneObject.getOPositionY()-i&& y<StoneObject.getOPositionY()+StoneHeight-i){
-									StoneObject.ShowPic(y-StoneObject.getOPositionY()+i, x-StoneObject.getOPositionX()-i, 0);
-								}		
-								else std::cout<<" ";
-							}
-							else if(x>=CatPlayer.getOPositionX()&& x<CatPlayer.getOPositionX()+CatWidth){
-								if(y>=CatPlayer.getOPositionY() && y<CatPlayer.getOPositionY()+CatHeight){
-									CatPlayer.ShowPic(y-CatPlayer.getOPositionY(), x-CatPlayer.getOPositionX(), 0);
+					for(int i=0; i<time1; i++){
+						if(i<time1/4){
+							for(int y = 0; y<Map_Height; y++){
+								for(int x = 0; x<Map_Width; x++){
+									if(x>=DogPlayer.getOPositionX() && x<DogPlayer.getOPositionX()+DogWidth){
+										if(y>=DogPlayer.getOPositionY() && y<DogPlayer.getOPositionY()+DogHeight){
+											DogPlayer.ShowPic(y-DogPlayer.getOPositionY(), x-DogPlayer.getOPositionX(), 0);
+										}		
+										else std::cout<<" ";
+									}
+									else if(x>=StoneObject.getOPositionX()+i&& x<StoneObject.getOPositionX()+StoneWidth+i){
+										if(y>=StoneObject.getOPositionY()-i&& y<StoneObject.getOPositionY()+StoneHeight-i){
+											StoneObject.ShowPic(y-StoneObject.getOPositionY()+i, x-StoneObject.getOPositionX()-i, 0);
+										}		
+										else std::cout<<" ";
+									}
+									else if(x>=CatPlayer.getOPositionX()&& x<CatPlayer.getOPositionX()+CatWidth){
+										if(y>=CatPlayer.getOPositionY() && y<CatPlayer.getOPositionY()+CatHeight){
+											CatPlayer.ShowPic(y-CatPlayer.getOPositionY(), x-CatPlayer.getOPositionX(), 0);
+										}
+										else std::cout<<" ";
+									}
+									else std::cout<<" ";
 								}
-								else std::cout<<" ";
+								std::cout<<std::endl;
 							}
-							else std::cout<<" ";
 						}
-						std::cout<<std::endl;
+						else{
+							for(int y = 0; y<Map_Height; y++){
+								for(int x = 0; x<Map_Width; x++){
+									if(x>=DogPlayer.getOPositionX() && x<DogPlayer.getOPositionX()+DogWidth){
+										if(y>=DogPlayer.getOPositionY() && y<DogPlayer.getOPositionY()+DogHeight){
+											DogPlayer.ShowPic(y-DogPlayer.getOPositionY(), x-DogPlayer.getOPositionX(), 0);
+										}		
+										else std::cout<<" ";
+									}
+									else if(x>=StoneObject.getOPositionX()+i&& x<StoneObject.getOPositionX()+StoneWidth+i){
+										if(y>=StoneObject.getOPositionY()+i-(int)(time1/4)*2&& y<StoneObject.getOPositionY()+StoneHeight+i-(int)(time1/4)*2){
+											StoneObject.ShowPic(y-StoneObject.getOPositionY()-i+(int)(time1/4)*2, x-StoneObject.getOPositionX()-i, 0);
+										}		
+										else std::cout<<" ";
+									}
+									else if(x>=CatPlayer.getOPositionX()&& x<CatPlayer.getOPositionX()+CatWidth){
+										if(y>=CatPlayer.getOPositionY() && y<CatPlayer.getOPositionY()+CatHeight){
+											CatPlayer.ShowPic(y-CatPlayer.getOPositionY(), x-CatPlayer.getOPositionX(), 0);
+										}
+										else std::cout<<" ";
+									}
+									else std::cout<<" ";
+								}
+								std::cout<<std::endl;
+							}
+
+						}
+						sleep(1);
+						system("clear");
 					}
-					sleep(1);
-					system("clear");
-				}
 					return ;
 				case status::HIT_BEHIND:
 					for(int y = 0; y<Map_Height; y++){

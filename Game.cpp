@@ -74,16 +74,16 @@ void game::ShowGame(int time1,int time2,status s){
 				for(int j=0;j<Distance+DogWidth*2+2;j++){
 					if(t<time1/2){
 						if(i<Map_Height-DogHeight-t&& i>=Map_Height-DogHeight-StoneHeight-t&&\
-							       	j>=DogWidth+t && j<DogWidth+StoneWidth+t){
-							Stone_o.ShowPic(i-(Map_Height-DogHeight-StoneHeight)+t,j-DogWidth-t,0);
+							       	j>=DogWidth+t*2&& j<DogWidth+StoneWidth+t*2){
+							Stone_o.ShowPic(i-(Map_Height-DogHeight-StoneHeight)+t,j-DogWidth-t*2,0);
 							store = t;
 						}
 						else std::cout<<" ";
 					}
 					else{
 						if(i<Map_Height-DogHeight-time1/2+(t-time1/2)&& i>=Map_Height-DogHeight-StoneHeight-time1/2+(t-time1/2)\
-							       	&& j>=DogWidth+t && j<DogWidth+StoneWidth+t){
-							Stone_o.ShowPic(i-(Map_Height-DogHeight-StoneHeight-time1/2+(t-time1/2)),j-DogWidth-t,0);
+							       	&& j>=DogWidth+t*2&& j<DogWidth+StoneWidth+t*2){
+							Stone_o.ShowPic(i-(Map_Height-DogHeight-StoneHeight-time1/2+(t-time1/2)),j-DogWidth-t*2,0);
 						}
 						else std::cout<<" ";
 					}

@@ -19,7 +19,7 @@ const char StartPic[Map_Height][Map_Width+1]={
 "                       **111*                                                                          ************************1                     ",
 "                       ***111*                                                                      ***************************11                    ",
 "                       ****111*                                                                    ****************************111                   ",
-"                       *****11*******************                                                 *****************************1111	              ",
+"                       *****11*******************                                                 *****************************1111                  ",
 "                       ***************************                                                ****************************111111                 ",
 "                       ****************************                                               ****************************1111111                ",
 "                      ******************************                                              ***************************111111111               ",
@@ -37,20 +37,63 @@ const char StartPic[Map_Height][Map_Width+1]={
 "               ***************************1*1*************                            *****************************************                      ",
 "               *************************1**1**************                            *****************************************                      ",
 "                **********************1***1**************                              ****************************************                      ",
-"                 ************************1**************                                 **************************************                      ",
-"                  *************************************                                     **********************************                       ",
-"                   ***********************************                                        ******************************                         ",
-"                     *******************************                                             *************************                           ",
-"                        *************************                                                   ********************                             ",
-"                            *****************                                                         ***************                                ",
-"                                **********                                                               **********                                  ",
+"                 ************************1**########**** ###    ######## ######## ##     **########****************************                      ",
+"                  **************************##*****##** ## ##      ##       ##    ##       ##*********************************                       ",
+"                   *************************##*****##* ##   ##     ##       ##    ##       ## ******************************                         ",
+"                     ***********************########  ##     ##    ##       ##    ##       ###### ************************                           ",
+"                        ********************##***  ## #########    ##       ##    ##       ##       ********************                             ",
+"                            ****************##     ## ##     ##    ##       ##    ##       ##         ***************                                ",
+"                                **********  ########  ##     ##    ##       ##    ######## ########      **********                                  ",
 "                                                                                                                                                     ",
 "                                                                                                                                                     ",
 "                                                                                                                                                     ",
-"                                   Cat                                 Battle                                Dog                                     ",
+"                                                                                                                                                     ",
 "                                                                                                                                                     ",
 "                                                                                                                                                     "
 };
+const char LostPic[Map_Height][Map_Width+1]={
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                            ******       ***     **     **  ********      *******   **     **  ********  ********    **                              ",
+"                           **    **     ** **    ***    **  **           **     **  **     **  **        **     **   **                              ",
+"                           **          **   **   ****  ***  **           **     **  **     **  **        **     **   **                              ",
+"                           **   ****  **     **  ** *** **  ******       **     **  **     **  ******    ********    **                              ",
+"                           **    **   *********  **  *  **  **           **     **   **   **   **        **   **     **                              ",
+"                           **    **   **     **  **     **  **           **     **    ** **    **        **    **                                    ",
+"                            ******    **     **  **     **  ********      *******      ***     ********  **     **   **                              ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     "
+};
+
 
 game::game(){
 	DogPlayer.setOPosition(oPosition,Map_Height-DogHeight);
@@ -428,146 +471,169 @@ static int timedown_ed = 18;
 static int timeup_behind = 30;
 static int timedown_behind = 20;
 int game::RunGame(){
-	srand( time (NULL));
-	StoneObject.setOPosition(oPosition+DogWidth, Map_Height - DogHeight - StoneHeight);
-	FishObject.setOPosition(oPosition+DogWidth+Distance-FishWidth, Map_Height -CatHeight-FishHeight);
 	Color::Modifier bgred(Color::BG_RED);
+	Color::Modifier bgblue(Color::BG_BLUE);
+	Color::Modifier bgblack(Color::BG_BLACK);
+	Color::Modifier bgwhite(Color::BG_WHITE);
 	Color::Modifier bgdef(Color::BG_DEFAULT);
-	std::cout<<"                   "; 
-	for(int i = 0; i<DogPlayer.getLife(); i++)std::cout<<bgred<<" "<<bgdef;
-	std::cout<<"                                                                          ";
-	for(int i = 0; i<CatPlayer.getLife(); i++)std::cout<<bgred<<" "<<bgdef;	
-	std::cout<<std::endl<<std::endl;
-	ShowGame(0,0,0,character::EMPTY);
-	std::cout<<\
-"                      1. Attack                                 2. Back the main page                                3. Quit                          "\
-<<std::endl<<std::endl<<std::endl<<std::endl;
-	std::cout<<\
-"                                                         Please Enter Which you want to do:";
-	int choice;
-	std::cin>>choice;
-	std::cout<<std::endl<<std::endl<<std::endl;
-	int power;
-	switch(choice){
-		case 1:
-			std::cout<<\
-"                                                                 Enter your power:";
-			std::cin>>power;
-			system("clear");
-			ShowGame(1,0,0,character::DOG);
-			sleep(3);
-			system("clear");
-			switch(isHIT(power,distance)){
-				case status::HIT_FRONT:
-					for(int i = 0; i<timeup_front; i++){ 
-						ShowGame(1,1,1,character::DOG);
-						sleep(1);
-						system("clear");
-					}
-					for(int i = 0; i<timedown_front-1; i++){
+	srand( time (NULL));
+	if(DogPlayer.getLife()>0 && CatPlayer.getLife()>0){
+		StoneObject.setOPosition(oPosition+DogWidth, Map_Height - DogHeight - StoneHeight);
+		FishObject.setOPosition(oPosition+DogWidth+Distance-FishWidth, Map_Height -CatHeight-FishHeight);
+		std::cout<<"                   "; 
+		for(int i = 0; i<DogPlayer.getLife(); i++)std::cout<<bgred<<" "<<bgdef;
+		std::cout<<"                                                                          ";
+		for(int i = 0; i<CatPlayer.getLife(); i++)std::cout<<bgred<<" "<<bgdef;
+		std::cout<<std::endl<<std::endl;
+		ShowGame(0,0,0,character::EMPTY);
+		std::cout<<\
+			"                      1. Attack                                 2. Back the main page                                3. Quit                          "\
+			<<std::endl<<std::endl<<std::endl<<std::endl;
+		std::cout<<\
+			"                                                         Please Enter Which you want to do:";
+		int choice;
+		std::cin>>choice;
+		std::cout<<std::endl<<std::endl<<std::endl;
+		int power;
+		int RobotP=0;
+		switch(choice){
+			case 1:
+				std::cout<<\
+					"                                                                 Enter your power:";
+				std::cin>>power;
+				system("clear");
+				ShowGame(1,0,0,character::DOG);
+				sleep(3);
+				system("clear");
+				switch(isHIT(power,distance)){
+					case status::HIT_FRONT:
+						for(int i = 0; i<timeup_front; i++){ 
+							ShowGame(1,1,1,character::DOG);
+							sleep(1);
+							system("clear");
+						}
+						for(int i = 0; i<timedown_front-1; i++){
+							ShowGame(1,1,0,character::DOG);
+							sleep(1);
+							system("clear");
+						}
 						ShowGame(1,1,0,character::DOG);
-						sleep(1);
+						sleep(3);
 						system("clear");
-					}
-					ShowGame(1,1,0,character::DOG);
-					sleep(3);
-					system("clear");
-					break;
-				case status::HITED:
-					for(int i = 0; i<timeup_ed; i++){ 
-						ShowGame(1,1,1,character::DOG);
-						sleep(1);
-						system("clear");
-					}
-					for(int i = 0; i<timedown_ed-1; i++){
+						break;
+					case status::HITED:
+						for(int i = 0; i<timeup_ed; i++){ 
+							ShowGame(1,1,1,character::DOG);
+							sleep(1);
+							system("clear");
+						}
+						for(int i = 0; i<timedown_ed-1; i++){
+							ShowGame(1,1,0,character::DOG);
+							sleep(1);
+							system("clear");
+						}
 						ShowGame(1,1,0,character::DOG);
-						sleep(1);
+						sleep(3);
 						system("clear");
-					}
-					ShowGame(1,1,0,character::DOG);
-					sleep(3);
-					system("clear");
-					distance = rand()%300 +100;
-					CatPlayer.setLife(CatPlayer.getLife()-1);
-					break;
-				case status::HIT_BEHIND:
-					for(int i = 0; i<timeup_behind; i++){ 
-						ShowGame(1,1,1,character::DOG);
-						sleep(1);
-						system("clear");
-					}
-					for(int i = 0; i<timedown_behind-1; i++){
+						distance = rand()%300 +100;
+						CatPlayer.setLife(CatPlayer.getLife()-5);
+						break;
+					case status::HIT_BEHIND:
+						for(int i = 0; i<timeup_behind; i++){ 
+							ShowGame(1,1,1,character::DOG);
+							sleep(1);
+							system("clear");
+						}
+						for(int i = 0; i<timedown_behind-1; i++){
+							ShowGame(1,1,0,character::DOG);
+							sleep(1);
+							system("clear");
+						}
 						ShowGame(1,1,0,character::DOG);
-						sleep(1);
+						sleep(3);
 						system("clear");
-					}
-					ShowGame(1,1,0,character::DOG);
-					sleep(3);
-					system("clear");
-					break;
+						break;
+				}
+				srand( time(NULL));
+				RobotP = rand()%30+10;
+				ShowGame(1,0,0,character::CAT);
+				sleep(3);
+				system("clear");
+				switch(isHIT(RobotP,distance)){
+					case status::HIT_FRONT:
+						for(int i = 0; i<timeup_front; i++){ 
+							ShowGame(1,1,1,character::CAT);
+							sleep(1);
+							system("clear");
+						}
+						for(int i = 0; i<timedown_front-1; i++){
+							ShowGame(1,1,0,character::CAT);
+							sleep(1);
+							system("clear");
+						}	
+						ShowGame(1,1,0,character::CAT);
+						sleep(3);
+						system("clear");
+						break;
+					case status::HITED:
+						for(int i = 0; i<timeup_ed; i++){ 
+							ShowGame(1,1,1,character::CAT);
+							sleep(1);
+							system("clear");
+						}
+						for(int i = 0; i<timedown_ed-1; i++){
+							ShowGame(1,1,0,character::CAT);
+							sleep(1);
+							system("clear");
+						}
+						ShowGame(1,1,0,character::CAT);
+						sleep(3);
+						system("clear");
+						distance = rand() %300+100; 
+						DogPlayer.setLife(DogPlayer.getLife()-5);
+						break;
+					case status::HIT_BEHIND:
+						for(int i = 0; i<timeup_behind; i++){ 
+							ShowGame(1,1,1,character::CAT);
+							sleep(1);
+							system("clear");
+						}
+						for(int i = 0; i<timedown_behind; i++){
+							ShowGame(1,1,0,character::CAT);
+							sleep(1);
+							system("clear");
+						}
+						break;
+				}
+				system("clear");
+				return 1;
+			case 2:
+				system("clear");
+				return 2;
+			case 3:
+				return 0;
+		}
+	}
+	else if(CatPlayer.getLife()>0){
+		for(int i = 0; i<Map_Height; i++){
+			for(int j = 0; j<Map_Width; j++){
+				if(LostPic[i][j] == '*') std::cout<<bgred<<" "<<bgdef;
+				else std::cout<<" ";
 			}
-			srand( time(NULL));
-			int RobotP = rand()%30+10;
-			ShowGame(1,0,0,character::CAT);
-			sleep(3);
-			system("clear");
-			switch(isHIT(RobotP,distance)){
-				case status::HIT_FRONT:
-					for(int i = 0; i<timeup_front; i++){ 
-						ShowGame(1,1,1,character::CAT);
-						sleep(1);
-						system("clear");
-					}
-					for(int i = 0; i<timedown_front-1; i++){
-						ShowGame(1,1,0,character::CAT);
-						sleep(1);
-						system("clear");
-					}	
-					ShowGame(1,1,0,character::CAT);
-					sleep(3);
-					system("clear");
-					break;
-				case status::HITED:
-					for(int i = 0; i<timeup_ed; i++){ 
-						ShowGame(1,1,1,character::CAT);
-						sleep(1);
-						system("clear");
-					}
-					for(int i = 0; i<timedown_ed-1; i++){
-						ShowGame(1,1,0,character::CAT);
-						sleep(1);
-						system("clear");
-					}
-					ShowGame(1,1,0,character::CAT);
-					sleep(3);
-					system("clear");
-					distance = rand() %300+100; 
-					DogPlayer.setLife(DogPlayer.getLife()-1);
-					break;
-				case status::HIT_BEHIND:
-					for(int i = 0; i<timeup_behind; i++){ 
-						ShowGame(1,1,1,character::CAT);
-						sleep(1);
-						system("clear");
-					}
-					for(int i = 0; i<timedown_behind; i++){
-						ShowGame(1,1,0,character::CAT);
-						sleep(1);
-						system("clear");
-					}
-					break;
+			std::cout<<std::endl;
+		}
+		sleep(2);
+
+	}
+	else {
+		for(int i = 0; i<Map_Height; i++){
+			for(int j = 0; j<Map_Width; j++){
+				if(LostPic[i][j] == '*') std::cout<<bgred<<" "<<bgdef;
+				else std::cout<<" ";
 			}
-			system("clear");
-			return 1;
-		/*
-		case 2:
-			system("clear");
-			return 2;
-		*
-		* /
-		case 3:
-			return 0;
-		*/
+			std::cout<<std::endl;
+		}
+		sleep(2);
 	}
 }
 
@@ -576,6 +642,7 @@ void game::StartGame(){
 	Color::Modifier bgdef(Color::BG_DEFAULT);
 	Color::Modifier bgblack(Color::BG_BLACK);
 	Color::Modifier bgblue(Color::BG_BLUE);
+	Color::Modifier bgred(Color::BG_RED);
 	system("clear");
 	distance = rand()%300 +100;
 	for(int i = 0; i<Map_Height; i++){
@@ -583,6 +650,7 @@ void game::StartGame(){
 			if(StartPic[i][j] == '*') std::cout<<bgwhite<<" "<<bgdef;
 			else if(StartPic[i][j] == '1') std::cout<<bgblack<<" "<<bgdef;
 			else if(StartPic[i][j] == ' ') std::cout<<bgblue<<" "<<bgdef;
+			else if(StartPic[i][j] == '#') std::cout<<bgred<<" "<<bgdef;
 			else std::cout<<StartPic[i][j];
 		}
 		std::cout<<std::endl;
@@ -596,7 +664,5 @@ void game::StartGame(){
 		if(isend == 2)StartGame();
 		isend = RunGame();
 	}
-	system("clear");
-	//OUTPUT END PIC
 	return ;
 }

@@ -2,10 +2,10 @@
 #include <iostream>
 #include <string>
 #include <unistd.h>
-#define Map_Height 60
-#define Distance 60
-#define oPosition 15
-#define Map_Width oPosition+Distance+DogWidth+CatWidth
+#define Map_Height 40
+#define Distance 70
+#define oPosition 20
+#define Map_Width oPosition+Distance+DogWidth+CatWidth+oPosition
 game::game(){
 	DogPlayer.setOPosition(oPosition,Map_Height-DogHeight);
 	CatPlayer.setOPosition(oPosition+Distance+DogWidth, Map_Height-CatHeight);
@@ -15,204 +15,339 @@ game::game(){
 
 game::~game(){;}
 
-void game::ShowGame( status s, bool isget, bool isshot, character c){
-	int time1=25;
+void game::ShowGame( bool isget, bool isshot, bool isup, character c){
 	if(!isget){
+		for(int j = 0; j<Map_Width+2; j++)std::cout<<"-";
+		std::cout<<std::endl;
 		for(int y = 0; y<Map_Height; y++){
+			std::cout<<"|";
 			for(int x = 0; x<Map_Width; x++){
-				if(x>=DogPlayer.getOPositionX() && x<DogPlayer.getOPositionX()+DogWidth){
-					if(y>=DogPlayer.getOPositionY() && y<DogPlayer.getOPositionY()+DogHeight){
-						DogPlayer.ShowPic(y-DogPlayer.getOPositionY(), x-DogPlayer.getOPositionX(), 0);
+				if(x>=DogPlayer.getOPositionX() && \
+						x<DogPlayer.getOPositionX()+DogWidth){
+					if(y>=DogPlayer.getOPositionY() && \
+							y<DogPlayer.getOPositionY()+DogHeight){
+						DogPlayer.ShowPic(y-DogPlayer.getOPositionY(), \
+								x-DogPlayer.getOPositionX(), 0);
 					}
 				}
-				else if(x>=CatPlayer.getOPositionX()&& x<CatPlayer.getOPositionX()+CatWidth){
-					if(y>=CatPlayer.getOPositionY() && y<CatPlayer.getOPositionY()+CatHeight){
-						CatPlayer.ShowPic(y-CatPlayer.getOPositionY(), x-CatPlayer.getOPositionX(), 0);
+				else if(x>=CatPlayer.getOPositionX() && \
+						x<CatPlayer.getOPositionX()+CatWidth){
+					if(y>=CatPlayer.getOPositionY() && \
+							y<CatPlayer.getOPositionY()+CatHeight){
+						CatPlayer.ShowPic(y-CatPlayer.getOPositionY(), \
+								x-CatPlayer.getOPositionX(), 0);
 					}
 				}
 				else{
 					std::cout<<" ";
 				}
 			}
+			std::cout<<"|";
 			std::cout<<std::endl;
 		}
+		for(int j = 0; j<Map_Width+2; j++)std::cout<<"-";
+		std::cout<<std::endl;
 		return ;
 	}
 	if(!isshot){
 		if(c == character::DOG){
+			for(int j = 0; j<Map_Width+2; j++)std::cout<<"-";
+			std::cout<<std::endl;
 			for(int y = 0; y<Map_Height; y++){
+				std::cout<<"|";
 				for(int x = 0; x<Map_Width; x++){
-					if(x>=DogPlayer.getOPositionX() && x<DogPlayer.getOPositionX()+DogWidth){
-						if(y>=DogPlayer.getOPositionY() && y<DogPlayer.getOPositionY()+DogHeight){
-							DogPlayer.ShowPic(y-DogPlayer.getOPositionY(), x-DogPlayer.getOPositionX(), 0);
+					if(x>=DogPlayer.getOPositionX() && \
+							x<DogPlayer.getOPositionX()+DogWidth){
+						if(y>=DogPlayer.getOPositionY() && \
+								y<DogPlayer.getOPositionY()+DogHeight){
+							DogPlayer.ShowPic(y-DogPlayer.getOPositionY(), \
+									x-DogPlayer.getOPositionX(), 0);
 						}		
 						else std::cout<<" ";
 					}
-					else if(x>=StoneObject.getOPositionX() && x<StoneObject.getOPositionX()+StoneWidth){
-						if(y>=StoneObject.getOPositionY() && y<StoneObject.getOPositionY()+StoneHeight){
-							StoneObject.ShowPic(y-StoneObject.getOPositionY(), x-StoneObject.getOPositionX(), 0);
+					else if(x>=StoneObject.getOPositionX() && \
+							x<StoneObject.getOPositionX()+StoneWidth){
+						if(y>=StoneObject.getOPositionY() && \
+								y<StoneObject.getOPositionY()+StoneHeight){
+							StoneObject.ShowPic(y-StoneObject.getOPositionY(), \
+									x-StoneObject.getOPositionX(), 0);
 						}		
 						else std::cout<<" ";
 					}
-					else if(x>=CatPlayer.getOPositionX()&& x<CatPlayer.getOPositionX()+CatWidth){
-						if(y>=CatPlayer.getOPositionY() && y<CatPlayer.getOPositionY()+CatHeight){
-							CatPlayer.ShowPic(y-CatPlayer.getOPositionY(), x-CatPlayer.getOPositionX(), 0);
+					else if(x>=CatPlayer.getOPositionX() && \
+							x<CatPlayer.getOPositionX()+CatWidth){
+						if(y>=CatPlayer.getOPositionY() && \
+								y<CatPlayer.getOPositionY()+CatHeight){
+							CatPlayer.ShowPic(y-CatPlayer.getOPositionY(), \
+									x-CatPlayer.getOPositionX(), 0);
 						}
 						else std::cout<<" ";
 					}
 					else std::cout<<" ";
 				}
+				std::cout<<"|";
 				std::cout<<std::endl;
 			}
+			for(int j = 0; j<Map_Width+2; j++)std::cout<<"-";
+			std::cout<<std::endl;
+			return ;
+		}
+		if(c == character::CAT){	
+			for(int j = 0; j<Map_Width+2; j++)std::cout<<"-";
+			std::cout<<std::endl;
+			for(int y = 0; y<Map_Height; y++){
+				std::cout<<"|";
+				for(int x = 0; x<Map_Width; x++){
+					if(x>=DogPlayer.getOPositionX() && \
+							x<DogPlayer.getOPositionX()+DogWidth){
+						if(y>=DogPlayer.getOPositionY() && \
+								y<DogPlayer.getOPositionY()+DogHeight){
+							DogPlayer.ShowPic(y-DogPlayer.getOPositionY(), \
+									x-DogPlayer.getOPositionX(), 0);
+						}
+						else std::cout<<" ";
+					}
+					else if(x>=CatPlayer.getOPositionX() && \
+							x<CatPlayer.getOPositionX()+CatWidth){
+						if(y>=CatPlayer.getOPositionY() && \
+								y<CatPlayer.getOPositionY()+CatHeight){
+							CatPlayer.ShowPic(y-CatPlayer.getOPositionY(), \
+									x-CatPlayer.getOPositionX(), 0);
+						}
+						else std::cout<<" ";
+
+					}
+					else if(x>=FishObject.getOPositionX() && \
+							x<FishObject.getOPositionX()+FishWidth){
+						if(y>=FishObject.getOPositionY() && \
+								y<FishObject.getOPositionY()+FishHeight){
+							FishObject.ShowPic(y-FishObject.getOPositionY(), \
+									x-FishObject.getOPositionX(), 0);
+						}
+						else std::cout<<" ";
+
+					}
+					else std::cout<<" ";
+				}
+				std::cout<<"|";
+				std::cout<<std::endl;
+			}
+			for(int j = 0; j<Map_Width+2; j++)std::cout<<"-";
+			std::cout<<std::endl;
+			return ;
+		}
+	}
+	if(isup){
+		if(c == character::DOG){	
+			for(int j = 0; j<Map_Width+2; j++)std::cout<<"-";
+			std::cout<<std::endl;
+			StoneObject.setOPosition(StoneObject.getOPositionX()+2,\
+					StoneObject.getOPositionY()-1);
+			for(int y = 0; y<Map_Height; y++){
+				std::cout<<"|";
+				for(int x = 0; x<Map_Width; x++){
+					if(x>=DogPlayer.getOPositionX() && \
+							x<DogPlayer.getOPositionX()+DogWidth){
+						if(y>=DogPlayer.getOPositionY() && \
+								y<DogPlayer.getOPositionY()+DogHeight){
+							DogPlayer.ShowPic(y-DogPlayer.getOPositionY(), \
+									x-DogPlayer.getOPositionX(), 0);
+						}		
+						else std::cout<<" ";
+					}
+					else if(x>=StoneObject.getOPositionX() && \
+							x<StoneObject.getOPositionX()+StoneWidth){
+						if(y>=StoneObject.getOPositionY() && \
+								y<StoneObject.getOPositionY()+StoneHeight){
+							StoneObject.ShowPic(y-StoneObject.getOPositionY(),\
+									x-StoneObject.getOPositionX(), 0);
+						}
+						else std::cout<<" ";
+					}
+					else if(x>=CatPlayer.getOPositionX() && \
+							x<CatPlayer.getOPositionX()+CatWidth){
+						if(y>=CatPlayer.getOPositionY() && \
+								y<CatPlayer.getOPositionY()+CatHeight){
+							CatPlayer.ShowPic(y-CatPlayer.getOPositionY(), \
+									x-CatPlayer.getOPositionX(), 0);
+						}
+						else std::cout<<" ";
+					}
+					else std::cout<<" ";
+				}
+				std::cout<<"|";
+				std::cout<<std::endl;
+			}	
+			for(int j = 0; j<Map_Width+2; j++)std::cout<<"-";
+			std::cout<<std::endl;
 			return ;
 		}
 		if(c == character::CAT){
+			FishObject.setOPosition(FishObject.getOPositionX()-2,\
+					FishObject.getOPositionY()-1);	
+			for(int j = 0; j<Map_Width+2; j++)std::cout<<"-";
+			std::cout<<std::endl;
 			for(int y = 0; y<Map_Height; y++){
+				std::cout<<"|";
 				for(int x = 0; x<Map_Width; x++){
-					if(x>=DogPlayer.getOPositionX() && x<DogPlayer.getOPositionX()+DogWidth){
-						if(y>=DogPlayer.getOPositionY() && y<DogPlayer.getOPositionY()+DogHeight){
-							DogPlayer.ShowPic(y-DogPlayer.getOPositionY(), x-DogPlayer.getOPositionX(), 0);
+					if(x>=DogPlayer.getOPositionX() && \
+							x<DogPlayer.getOPositionX()+DogWidth){
+						if(y>=DogPlayer.getOPositionY() && \
+								y<DogPlayer.getOPositionY()+DogHeight){
+							DogPlayer.ShowPic(y-DogPlayer.getOPositionY(), \
+									x-DogPlayer.getOPositionX(), 0);
+						}		
+						else std::cout<<" ";
+					}
+					else if(x>=FishObject.getOPositionX() && \
+							x<FishObject.getOPositionX()+FishWidth){
+						if(y>=FishObject.getOPositionY() && \
+								y<FishObject.getOPositionY()+FishHeight ){
+							FishObject.ShowPic(y-FishObject.getOPositionY(),\
+									x-FishObject.getOPositionX(), 0);
 						}
 						else std::cout<<" ";
 					}
-					else if(x>=CatPlayer.getOPositionX()&& x<CatPlayer.getOPositionX()+CatWidth){
-						if(y>=CatPlayer.getOPositionY() && y<CatPlayer.getOPositionY()+CatHeight){
-							CatPlayer.ShowPic(y-CatPlayer.getOPositionY(), x-CatPlayer.getOPositionX(), 0);
+					else if(x>=CatPlayer.getOPositionX() && \
+							x<CatPlayer.getOPositionX()+CatWidth){
+						if(y>=CatPlayer.getOPositionY() && \
+								y<CatPlayer.getOPositionY()+CatHeight){
+							CatPlayer.ShowPic(y-CatPlayer.getOPositionY(), \
+									x-CatPlayer.getOPositionX(), 0);
 						}
 						else std::cout<<" ";
-
-					}
-					else if(x>=FishObject.getOPositionX() && x<FishObject.getOPositionX()+FishWidth){
-						if(y>=FishObject.getOPositionY() && y<FishObject.getOPositionY()+FishHeight){
-							FishObject.ShowPic(y-FishObject.getOPositionY(), x-FishObject.getOPositionX(), 0);
-						}
-						else std::cout<<" ";
-
 					}
 					else std::cout<<" ";
 				}
+				std::cout<<"|";
 				std::cout<<std::endl;
 			}
+			for(int j = 0; j<Map_Width+2; j++)std::cout<<"-";
+			std::cout<<std::endl;
 			return ;
 		}
 	}
 	else{
+		bool changeCharacter = false;
+		bool changeThrow_o = false;
 		if(c == character::DOG){
-			switch(s){
-				case status::HIT_FRONT:
-					for(int i=0; i<time1; i++){
-						if(i<time1/4){
-							for(int y = 0; y<Map_Height; y++){
-								for(int x = 0; x<Map_Width; x++){
-									if(x>=DogPlayer.getOPositionX() && x<DogPlayer.getOPositionX()+DogWidth){
-										if(y>=DogPlayer.getOPositionY() && y<DogPlayer.getOPositionY()+DogHeight){
-											DogPlayer.ShowPic(y-DogPlayer.getOPositionY(), x-DogPlayer.getOPositionX(), 0);
-										}		
-										else std::cout<<" ";
-									}
-									else if(x>=StoneObject.getOPositionX()+i&& x<StoneObject.getOPositionX()+StoneWidth+i){
-										if(y>=StoneObject.getOPositionY()-i&& y<StoneObject.getOPositionY()+StoneHeight-i){
-											StoneObject.ShowPic(y-StoneObject.getOPositionY()+i, x-StoneObject.getOPositionX()-i, 0);
-										}		
-										else std::cout<<" ";
-									}
-									else if(x>=CatPlayer.getOPositionX()&& x<CatPlayer.getOPositionX()+CatWidth){
-										if(y>=CatPlayer.getOPositionY() && y<CatPlayer.getOPositionY()+CatHeight){
-											CatPlayer.ShowPic(y-CatPlayer.getOPositionY(), x-CatPlayer.getOPositionX(), 0);
-										}
-										else std::cout<<" ";
-									}
-									else std::cout<<" ";
-								}
-								std::cout<<std::endl;
-							}
-						}
-						else{
-							for(int y = 0; y<Map_Height; y++){
-								for(int x = 0; x<Map_Width; x++){
-									if(x>=DogPlayer.getOPositionX() && x<DogPlayer.getOPositionX()+DogWidth){
-										if(y>=DogPlayer.getOPositionY() && y<DogPlayer.getOPositionY()+DogHeight){
-											DogPlayer.ShowPic(y-DogPlayer.getOPositionY(), x-DogPlayer.getOPositionX(), 0);
-										}		
-										else std::cout<<" ";
-									}
-									else if(x>=StoneObject.getOPositionX()+i&& x<StoneObject.getOPositionX()+StoneWidth+i){
-										if(y>=StoneObject.getOPositionY()+i-(int)(time1/4)*2&& y<StoneObject.getOPositionY()+StoneHeight+i-(int)(time1/4)*2){
-											StoneObject.ShowPic(y-StoneObject.getOPositionY()-i+(int)(time1/4)*2, x-StoneObject.getOPositionX()-i, 0);
-										}		
-										else std::cout<<" ";
-									}
-									else if(x>=CatPlayer.getOPositionX()&& x<CatPlayer.getOPositionX()+CatWidth){
-										if(y>=CatPlayer.getOPositionY() && y<CatPlayer.getOPositionY()+CatHeight){
-											CatPlayer.ShowPic(y-CatPlayer.getOPositionY(), x-CatPlayer.getOPositionX(), 0);
-										}
-										else std::cout<<" ";
-									}
-									else std::cout<<" ";
-								}
-								std::cout<<std::endl;
-							}
-
-						}
-						sleep(1);
-						system("clear");
-					}
-					return ;
-				case status::HIT_BEHIND:
-					for(int y = 0; y<Map_Height; y++){
-						for(int x = 0; x<Map_Width; x++){
-							if(x>=DogPlayer.getOPositionX() && x<DogPlayer.getOPositionX()+DogWidth){
-								if(y>=DogPlayer.getOPositionY() && y<DogPlayer.getOPositionY()+DogHeight){
-									DogPlayer.ShowPic(y-DogPlayer.getOPositionY(), x-DogPlayer.getOPositionX(), 0);
-								}		
-								else std::cout<<" ";
-							}
-							else if(x>=StoneObject.getOPositionX() && x<StoneObject.getOPositionX()+StoneWidth){
-								if(y>=StoneObject.getOPositionY() && y<StoneObject.getOPositionY()+StoneHeight){
-									StoneObject.ShowPic(y-StoneObject.getOPositionY(), x-StoneObject.getOPositionX(), 0);
-								}		
-								else std::cout<<" ";
-							}
-							else if(x>=CatPlayer.getOPositionX()&& x<CatPlayer.getOPositionX()+CatWidth){
-								if(y>=CatPlayer.getOPositionY() && y<CatPlayer.getOPositionY()+CatHeight){
-									CatPlayer.ShowPic(y-CatPlayer.getOPositionY(), x-CatPlayer.getOPositionX(), 0);
-								}
-								else std::cout<<" ";
-							}
-							else std::cout<<" ";
-						}
-						std::cout<<std::endl;
-					}
-					return ;
+			if(StoneObject.getOPositionX()+StoneWidth == CatPlayer.getOPositionX()){
+				if(StoneObject.getOPositionY()+StoneHeight >= CatPlayer.getOPositionY() && \
+						StoneObject.getOPositionY()+StoneHeight<Map_Height){
+					changeCharacter = true;
+					changeThrow_o = true;
+				}
 			}
-		}
-		if(c == character::CAT){
+			else if(StoneObject.getOPositionY()+StoneHeight >= Map_Height){
+				changeThrow_o = true;
+			}
+			else{
+				StoneObject.setOPosition(StoneObject.getOPositionX()+2,\
+						StoneObject.getOPositionY()+1);
+			}
+			for(int j = 0; j<Map_Width+2; j++)std::cout<<"-";
+			std::cout<<std::endl;
 			for(int y = 0; y<Map_Height; y++){
+				std::cout<<"|";
 				for(int x = 0; x<Map_Width; x++){
-					if(x>=DogPlayer.getOPositionX() && x<DogPlayer.getOPositionX()+DogWidth){
-						if(y>=DogPlayer.getOPositionY() && y<DogPlayer.getOPositionY()+DogHeight){
-							DogPlayer.ShowPic(y-DogPlayer.getOPositionY(), x-DogPlayer.getOPositionX(), 0);
+					if(x>=DogPlayer.getOPositionX() && \
+							x<DogPlayer.getOPositionX()+DogWidth){
+						if(y>=DogPlayer.getOPositionY() && \
+								y<DogPlayer.getOPositionY()+DogHeight){
+							DogPlayer.ShowPic(y-DogPlayer.getOPositionY(), \
+									x-DogPlayer.getOPositionX(), 0);
+						}		
+						else std::cout<<" ";
+					}
+					else if(x>=StoneObject.getOPositionX() && \
+							x<StoneObject.getOPositionX()+StoneWidth){
+						if(y>=StoneObject.getOPositionY() && \
+								y<StoneObject.getOPositionY()+StoneHeight &&\
+								y+StoneHeight<Map_Height){
+							StoneObject.ShowPic(y-StoneObject.getOPositionY(),\
+									x-StoneObject.getOPositionX(), changeThrow_o);
 						}
 						else std::cout<<" ";
 					}
-					else if(x>=CatPlayer.getOPositionX()&& x<CatPlayer.getOPositionX()+CatWidth){
-						if(y>=CatPlayer.getOPositionY() && y<CatPlayer.getOPositionY()+CatHeight){
-							CatPlayer.ShowPic(y-CatPlayer.getOPositionY(), x-CatPlayer.getOPositionX(), 0);
+					else if(x>=CatPlayer.getOPositionX() && \
+							x<CatPlayer.getOPositionX()+CatWidth){
+						if(y>=CatPlayer.getOPositionY() && \
+								y<CatPlayer.getOPositionY()+CatHeight){
+							CatPlayer.ShowPic(y-CatPlayer.getOPositionY(), \
+									x-CatPlayer.getOPositionX(), changeCharacter);
 						}
 						else std::cout<<" ";
-
-					}
-					else if(x>=FishObject.getOPositionX() && x<FishObject.getOPositionX()+FishWidth){
-						if(y>=FishObject.getOPositionY() && y<FishObject.getOPositionY()+FishHeight){
-							FishObject.ShowPic(y-FishObject.getOPositionY(), x-FishObject.getOPositionX(), 0);
-						}
-						else std::cout<<" ";
-
 					}
 					else std::cout<<" ";
 				}
+				std::cout<<"|";
+				std::cout<<std::endl;
+			}	
+			for(int j = 0; j<Map_Width+2; j++)std::cout<<"-";
+			std::cout<<std::endl;
+			changeCharacter = false;
+			changeThrow_o = false;
+			return ;
+		}
+		if(c == character::CAT){
+			bool changeCharacter = false;
+			bool changeThrow_o = false;
+			if(FishObject.getOPositionX()+FishWidth == DogPlayer.getOPositionX()){
+				if(FishObject.getOPositionY()+FishHeight >= DogPlayer.getOPositionY() && \
+						FishObject.getOPositionY()+FishHeight<Map_Height){
+					changeCharacter = true;
+					changeThrow_o = true;
+				}
+			}
+			else if(FishObject.getOPositionY()+FishHeight >= Map_Height){
+				changeThrow_o = true;
+			}
+			else{
+				FishObject.setOPosition(FishObject.getOPositionX()-2,\
+						FishObject.getOPositionY()+1);
+			}
+			for(int j = 0; j<Map_Width+2; j++)std::cout<<"-";
+			std::cout<<std::endl;
+			for(int y = 0; y<Map_Height; y++){
+				std::cout<<"|";
+				for(int x = 0; x<Map_Width; x++){
+					if(x>=DogPlayer.getOPositionX() && \
+							x<DogPlayer.getOPositionX()+DogWidth){
+						if(y>=DogPlayer.getOPositionY() && \
+								y<DogPlayer.getOPositionY()+DogHeight){
+							DogPlayer.ShowPic(y-DogPlayer.getOPositionY(), \
+									x-DogPlayer.getOPositionX(), changeCharacter);
+						}		
+						else std::cout<<" ";
+					}
+					else if(x>=FishObject.getOPositionX() && \
+							x<FishObject.getOPositionX()+FishWidth){
+						if(y>=FishObject.getOPositionY() && \
+								y<FishObject.getOPositionY()+FishHeight &&\
+								y+FishHeight<Map_Height){
+							FishObject.ShowPic(y-FishObject.getOPositionY(),\
+									x-FishObject.getOPositionX(), changeThrow_o);
+						}		
+						else std::cout<<" ";
+					}
+					else if(x>=CatPlayer.getOPositionX() && \
+							x<CatPlayer.getOPositionX()+CatWidth){
+						if(y>=CatPlayer.getOPositionY() && \
+								y<CatPlayer.getOPositionY()+CatHeight){
+							CatPlayer.ShowPic(y-CatPlayer.getOPositionY(), \
+									x-CatPlayer.getOPositionX(), 0);
+						}
+						else std::cout<<" ";
+					}
+					else std::cout<<" ";
+				}
+				std::cout<<"|";
 				std::cout<<std::endl;
 			}
+			for(int j = 0; j<Map_Width+2; j++)std::cout<<"-";
+			std::cout<<std::endl;
+			changeCharacter = false;
+			changeCharacter = false;
 			return ;
 		}
 

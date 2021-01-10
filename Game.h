@@ -19,7 +19,7 @@ class game{
 		game();
 		~game();
 		void StartGame();
-		void ShowGame(status,bool,bool,character);
+		void ShowGame(bool,bool,bool,character);
 		bool IsHit(float,float,int);//target pos, O_throw pos, power, angle 
 		void setDogPosition(float);
 		void setCatPosition(float);

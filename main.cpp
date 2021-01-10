@@ -1,10 +1,11 @@
 #include "Game.h"
+#include "Dog.h"
 #include <iostream>
 using namespace std;
 
 
 int main(){
-	game r;
-	r.ShowGame(status::HIT_FRONT , 1, 1, character::DOG);
+	game f;
+	f.ShowGame(1,1,1,character::CAT);
 	return 0;
 }

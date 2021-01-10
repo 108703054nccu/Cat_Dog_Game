@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include <string>
 #include <unistd.h>
+#include <string>
 #include "Color_m.h"
 #define Map_Height 40
 #define Distance 70
@@ -93,6 +94,92 @@ const char LostPic[Map_Height][Map_Width+1]={
 "                                                                                                                                                     ",
 "                                                                                                                                                     "
 };
+const char WinPic[Map_Height][Map_Width+1]={
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                           **      **  ****  **    **  **                                                            ",
+"                                                           **  **  **   **   ***   **  **                                                            ",
+"                                                           **  **  **   **   ****  **  **                                                            ",
+"                                                           **  **  **   **   ** ** **  **                                                            ",
+"                                                           **  **  **   **   **  ****  **                                                            ",
+"                                                           **  **  **   **   **   ***                                                                ",
+"                                                            ***  ***   ****  **    **  **                                                            ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     "
+};
+const char WarningPic[Map_Height][Map_Width+1]={
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                             **      **    ***    ********  **    ** **** **    **  ******                                           ",
+"                                             **  **  **   ** **   **     ** ***   **  **  ***   ** **    **                                          ",
+"                                             **  **  **  **   **  **     ** ****  **  **  ****  ** **                                                ",
+"                                             **  **  ** **     ** ********  ** ** **  **  ** ** ** **   ****                                         ",
+"                                             **  **  ** ********* **   **   **  ****  **  **  **** **    **                                          ",
+"                                             **  **  ** **     ** **    **  **   ***  **  **   *** **    **                                          ",
+"                                              ***  ***  **     ** **     ** **    ** **** **    **  ******                                           ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                            Cat and Dog are at it again!                                                             ",
+"                                                                                                                                                     ",
+"                                   It's a windy day and they are throwing stuff at each other until one of them gives up,                            ",
+"                                                                                                                                                     ",
+"                                                      Who's gonna be the winner on this battle?                                                      ",
+"                                                                                                                                                     ",
+"                                                 Input a force number carefully and try to win the game!                                             ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     ",
+"                                                                                                                                                     "
+};
+
+
 
 
 game::game(){
@@ -480,6 +567,7 @@ int game::RunGame(){
 	if(DogPlayer.getLife()>0 && CatPlayer.getLife()>0){
 		StoneObject.setOPosition(oPosition+DogWidth, Map_Height - DogHeight - StoneHeight);
 		FishObject.setOPosition(oPosition+DogWidth+Distance-FishWidth, Map_Height -CatHeight-FishHeight);
+		std::cout<<std::endl<<std::endl;
 		std::cout<<"                   "; 
 		for(int i = 0; i<DogPlayer.getLife(); i++)std::cout<<bgred<<" "<<bgdef;
 		std::cout<<"                                                                          ";
@@ -606,12 +694,16 @@ int game::RunGame(){
 						break;
 				}
 				system("clear");
-				return 1;
+				break;
 			case 2:
+				std::cout<<"w";
 				system("clear");
-				return 2;
+				return -1;
+				std::cout<<"oh!";
+				break;
 			case 3:
 				return 0;
+				break;
 		}
 	}
 	else if(CatPlayer.getLife()>0){
@@ -623,18 +715,20 @@ int game::RunGame(){
 			std::cout<<std::endl;
 		}
 		sleep(2);
-
+		return 0;
 	}
 	else {
 		for(int i = 0; i<Map_Height; i++){
 			for(int j = 0; j<Map_Width; j++){
-				if(LostPic[i][j] == '*') std::cout<<bgred<<" "<<bgdef;
+				if(WinPic[i][j] == '*') std::cout<<bgblue<<" "<<bgdef;
 				else std::cout<<" ";
 			}
 			std::cout<<std::endl;
 		}
 		sleep(2);
+		return 0;
 	}
+	return 1;
 }
 
 void game::StartGame(){
@@ -643,6 +737,10 @@ void game::StartGame(){
 	Color::Modifier bgblack(Color::BG_BLACK);
 	Color::Modifier bgblue(Color::BG_BLUE);
 	Color::Modifier bgred(Color::BG_RED);
+	Color::Modifier fgwhite(Color::FG_WHITE);
+	Color::Modifier fgdef(Color::FG_DEFAULT);
+	std::string e;
+	getline(std::cin,e);
 	system("clear");
 	distance = rand()%300 +100;
 	for(int i = 0; i<Map_Height; i++){
@@ -655,14 +753,24 @@ void game::StartGame(){
 		}
 		std::cout<<std::endl;
 	}
-	sleep(2);
+	getline(std::cin,e);
 	system("clear");
-	//INPUT START PIC
+	for(int i = 0; i<Map_Height; i++){
+		for(int j = 0; j<Map_Width; j++){
+			if(WarningPic[i][j] == '*') std::cout<<bgred<<" "<<bgdef;
+			else if(WarningPic[i][j] == ' ') std::cout<<bgblack<<" "<<bgdef;
+			else std::cout<<bgblack<<fgwhite<<WarningPic[i][j]<<fgdef<<bgdef;
+		}
+		std::cout<<std::endl;
+	}
+	getline(std::cin,e);
 	system("clear");
-	bool isend =true;
-	while(isend){
-		if(isend == 2)StartGame();
+
+	int isend ;
+	while(isend != 0){
 		isend = RunGame();
+		///std::cout << isend;
+		if(isend == -1)StartGame();
 	}
 	return ;
 }

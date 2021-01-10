@@ -29,6 +29,7 @@ void game::ShowGame( bool isget, bool isshot, bool isup, character c){
 						DogPlayer.ShowPic(y-DogPlayer.getOPositionY(), \
 								x-DogPlayer.getOPositionX(), 0);
 					}
+					else std::cout<<" ";
 				}
 				else if(x>=CatPlayer.getOPositionX() && \
 						x<CatPlayer.getOPositionX()+CatWidth){
@@ -37,6 +38,7 @@ void game::ShowGame( bool isget, bool isshot, bool isup, character c){
 						CatPlayer.ShowPic(y-CatPlayer.getOPositionY(), \
 								x-CatPlayer.getOPositionX(), 0);
 					}
+					else std::cout<<" ";
 				}
 				else{
 					std::cout<<" ";
@@ -352,4 +354,41 @@ void game::ShowGame( bool isget, bool isshot, bool isup, character c){
 		}
 
 	}
+}
+
+int game::RunGame(){
+	//Get Blood
+	//Show Blood
+	ShowGame(0,0,0,character::EMPTY);
+	std::cout<<"1. Attack "<<"2.        "<<"3. Quit   "<<std::endl;
+	std::cout<<"Please Enter Which you want to do:";
+	int choice;
+	std::cin>>choice;
+	int power;
+	switch(choice){
+		case 1:
+			std::cout<<"Enter your power:";
+			std::cin>>power;
+			std::cout<<power<<std::endl;
+			system("clear");
+			return 0;
+		case 2:
+			system("clear");
+			return 0;
+		case 3:
+			return 1;
+	}
+}
+
+void game::StartGame(){
+	system("clear");
+	//INPUT START PIC
+	system("clear");
+	bool isend =false;
+	while(!isend){
+		isend = RunGame();
+	}
+	system("clear");
+	//OUTPUT END PIC
+	return ;
 }

@@ -19,12 +19,13 @@ class game{
 		game();
 		~game();
 		void StartGame();
+		int RunGame();
 		void ShowGame(bool,bool,bool,character);
 		bool IsHit(float,float,int);//target pos, O_throw pos, power, angle 
-		void setDogPosition(float);
-		void setCatPosition(float);
-		float getDogPosition();
-		float getCatPosition();
+		//void setDogPosition(float);
+		//void setCatPosition(float);
+		//float getDogPosition();
+		//float getCatPosition();
 	private:
 		dog DogPlayer;
 		cat CatPlayer;

@@ -11,6 +11,8 @@ game::game(){
 	CatPlayer.setOPosition(oPosition+Distance+DogWidth, Map_Height-CatHeight);
 	StoneObject.setOPosition(oPosition+DogWidth,Map_Height-DogHeight-StoneHeight);
 	FishObject.setOPosition(oPosition+DogWidth+Distance-FishWidth,Map_Height-CatHeight-FishHeight);
+	DogPlayer.setLife(20);
+	CatPlayer.setLife(20);
 }
 
 game::~game(){;}
@@ -240,7 +242,10 @@ void game::ShowGame( bool isget, bool isshot, bool isup, character c){
 					changeThrow_o = true;
 				}
 			}
-			if(StoneObject.getOPositionY()+StoneHeight >= Map_Height){
+			if(StoneObject.getOPositionY()+StoneHeight >= Map_Height ){
+				changeThrow_o = true;
+			}
+			else if(StoneObject.getOPositionX()+StoneWidth >= Map_Width){
 				changeThrow_o = true;
 			}
 			else{
@@ -264,11 +269,16 @@ void game::ShowGame( bool isget, bool isshot, bool isup, character c){
 					else if(x>=StoneObject.getOPositionX() && \
 							x<StoneObject.getOPositionX()+StoneWidth){
 						if(y>=StoneObject.getOPositionY() && \
-								y<StoneObject.getOPositionY()+StoneHeight &&\
-								y+StoneHeight<Map_Height){
+								y<StoneObject.getOPositionY()+StoneHeight ){
 							StoneObject.ShowPic(y-StoneObject.getOPositionY(),\
 									x-StoneObject.getOPositionX(), changeThrow_o);
 						}
+						/*
+						 if(y >=CatPlayer.getOPositionY() && \
+								y>=StoneObject.getOPositionY()+StoneHeight && \
+								y< StoneObject.getOPositionY())
+							std::cout<<"";
+						*/
 						else std::cout<<" ";
 					}
 					else if(x>=CatPlayer.getOPositionX() && \
@@ -325,8 +335,7 @@ void game::ShowGame( bool isget, bool isshot, bool isup, character c){
 					else if(x>=FishObject.getOPositionX() && \
 							x<FishObject.getOPositionX()+FishWidth){
 						if(y>=FishObject.getOPositionY() && \
-								y<FishObject.getOPositionY()+FishHeight &&\
-								y+FishHeight<Map_Height){
+								y<FishObject.getOPositionY()+FishHeight ){
 							FishObject.ShowPic(y-FishObject.getOPositionY(),\
 									x-FishObject.getOPositionX(), changeThrow_o);
 						}		
@@ -356,23 +365,33 @@ void game::ShowGame( bool isget, bool isshot, bool isup, character c){
 	}
 }
 static int timeup_front = 5;
-static int timedown_front =12;
+static int timedown_front =16;
 static int timeup_ed = 13;
 static int timedown_ed = 18;
-static int timeup_behind = 10;
-static int timedown_behind = 22;
+static int timeup_behind = 30;
+static int timedown_behind = 20;
 int game::RunGame(){
 	//Get Blood
 	//Show Blood
+	std::cout<<"                   "; 
+	for(int i = 0; i<DogPlayer.getLife(); i++)std::cout<<"#";
+	std::cout<<"                                                                          ";
+	for(int i = 0; i<CatPlayer.getLife(); i++)std::cout<<"#";	
+	std::cout<<std::endl<<std::endl;
 	ShowGame(0,0,0,character::EMPTY);
-	std::cout<<"1. Attack "<<"2.        "<<"3. Quit   "<<std::endl;
-	std::cout<<"Please Enter Which you want to do:";
+	std::cout<<\
+"                      1. Attack                                 2. Change Chararcter                                  3. Quit                          "\
+<<std::endl<<std::endl<<std::endl<<std::endl;
+	std::cout<<\
+"                                                         Please Enter Which you want to do:";
 	int choice;
 	std::cin>>choice;
+	std::cout<<std::endl<<std::endl<<std::endl;
 	int power;
 	switch(choice){
 		case 1:
-			std::cout<<"Enter your power:";
+			std::cout<<\
+"                                                                 Enter your power:";
 			std::cin>>power;
 			system("clear");
 			switch(status::HITED){
@@ -382,11 +401,14 @@ int game::RunGame(){
 						sleep(1);
 						system("clear");
 					}
-					for(int i = 0; i<timedown_front; i++){
+					for(int i = 0; i<timedown_front-1; i++){
 						ShowGame(1,1,0,character::DOG);
 						sleep(1);
 						system("clear");
 					}
+					ShowGame(1,1,0,character::DOG);
+					sleep(3);
+					system("clear");
 					break;
 				case status::HITED:
 					for(int i = 0; i<timeup_ed; i++){ 
@@ -400,7 +422,7 @@ int game::RunGame(){
 						system("clear");
 					}
 					ShowGame(1,1,0,character::DOG);
-					sleep(1);
+					sleep(3);
 					system("clear");
 					break;
 				case status::HIT_BEHIND:
@@ -409,11 +431,14 @@ int game::RunGame(){
 						sleep(1);
 						system("clear");
 					}
-					for(int i = 0; i<timedown_behind; i++){
+					for(int i = 0; i<timedown_behind-1; i++){
 						ShowGame(1,1,0,character::DOG);
 						sleep(1);
 						system("clear");
 					}
+					ShowGame(1,1,0,character::DOG);
+					sleep(3);
+					system("clear");
 					break;
 			}
 			switch(status::HITED){
@@ -423,11 +448,14 @@ int game::RunGame(){
 						sleep(1);
 						system("clear");
 					}
-					for(int i = 0; i<timedown_front; i++){
+					for(int i = 0; i<timedown_front-1; i++){
 						ShowGame(1,1,0,character::CAT);
 						sleep(1);
 						system("clear");
-					}
+					}	
+					ShowGame(1,1,0,character::CAT);
+					sleep(3);
+					system("clear");
 					break;
 				case status::HITED:
 					for(int i = 0; i<timeup_ed; i++){ 
@@ -441,7 +469,7 @@ int game::RunGame(){
 						system("clear");
 					}
 					ShowGame(1,1,0,character::CAT);
-					sleep(2);
+					sleep(3);
 					system("clear");
 					break;
 				case status::HIT_BEHIND:

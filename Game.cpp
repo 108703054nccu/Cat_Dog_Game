@@ -1,5 +1,7 @@
 #include "Game.h"
 #include <iostream>
+#include <ctime>
+#include <cstdlib>
 #include <string>
 #include <unistd.h>
 #include "Color_m.h"
@@ -317,12 +319,6 @@ void game::ShowGame( bool isget, bool isshot, bool isup, character c){
 							StoneObject.ShowPic(y-StoneObject.getOPositionY(),\
 									x-StoneObject.getOPositionX(), changeThrow_o);
 						}
-						/*
-						 if(y >=CatPlayer.getOPositionY() && \
-								y>=StoneObject.getOPositionY()+StoneHeight && \
-								y< StoneObject.getOPositionY())
-							std::cout<<"";
-						*/
 						else std::cout<<" ";
 					}
 					else if(x>=CatPlayer.getOPositionX() && \
@@ -367,21 +363,22 @@ void game::ShowGame( bool isget, bool isshot, bool isup, character c){
 			for(int y = 0; y<Map_Height; y++){
 				std::cout<<"|";
 				for(int x = 0; x<Map_Width; x++){
-					if(x>=DogPlayer.getOPositionX() && \
-							x<DogPlayer.getOPositionX()+DogWidth){
-						if(y>=DogPlayer.getOPositionY() && \
-								y<DogPlayer.getOPositionY()+DogHeight){
-							DogPlayer.ShowPic(y-DogPlayer.getOPositionY(), \
-									x-DogPlayer.getOPositionX(), changeCharacter);
-						}		
-						else std::cout<<" ";
-					}
-					else if(x>=FishObject.getOPositionX() && \
+					if(x>=FishObject.getOPositionX() && \
 							x<FishObject.getOPositionX()+FishWidth){
 						if(y>=FishObject.getOPositionY() && \
 								y<FishObject.getOPositionY()+FishHeight ){
 							FishObject.ShowPic(y-FishObject.getOPositionY(),\
 									x-FishObject.getOPositionX(), changeThrow_o);
+						}		
+						else std::cout<<" ";
+					}
+
+					else if(x>=DogPlayer.getOPositionX() && \
+							x<DogPlayer.getOPositionX()+DogWidth){
+						if(y>=DogPlayer.getOPositionY() && \
+								y<DogPlayer.getOPositionY()+DogHeight){
+							DogPlayer.ShowPic(y-DogPlayer.getOPositionY(), \
+									x-DogPlayer.getOPositionX(), changeCharacter);
 						}		
 						else std::cout<<" ";
 					}
@@ -408,6 +405,22 @@ void game::ShowGame( bool isget, bool isshot, bool isup, character c){
 
 	}
 }
+
+status isHIT(int power, int distance){
+
+	int gap = (power * power / 2 ) - distance;
+	
+	if(gap < -10){
+		return status::HIT_FRONT;
+	}
+	else if(gap < 10){
+		return status::HITED;
+	}
+	else{
+		return status::HIT_BEHIND;
+	}
+}
+static int distance;
 static int timeup_front = 5;
 static int timedown_front =16;
 static int timeup_ed = 13;
@@ -415,6 +428,9 @@ static int timedown_ed = 18;
 static int timeup_behind = 30;
 static int timedown_behind = 20;
 int game::RunGame(){
+	srand( time (NULL));
+	StoneObject.setOPosition(oPosition+DogWidth, Map_Height - DogHeight - StoneHeight);
+	FishObject.setOPosition(oPosition+DogWidth+Distance-FishWidth, Map_Height -CatHeight-FishHeight);
 	Color::Modifier bgred(Color::BG_RED);
 	Color::Modifier bgdef(Color::BG_DEFAULT);
 	std::cout<<"                   "; 
@@ -424,7 +440,7 @@ int game::RunGame(){
 	std::cout<<std::endl<<std::endl;
 	ShowGame(0,0,0,character::EMPTY);
 	std::cout<<\
-"                      1. Attack                                 2. Change Chararcter                                  3. Quit                          "\
+"                      1. Attack                                 2. Back the main page                                3. Quit                          "\
 <<std::endl<<std::endl<<std::endl<<std::endl;
 	std::cout<<\
 "                                                         Please Enter Which you want to do:";
@@ -438,7 +454,10 @@ int game::RunGame(){
 "                                                                 Enter your power:";
 			std::cin>>power;
 			system("clear");
-			switch(status::HITED){
+			ShowGame(1,0,0,character::DOG);
+			sleep(3);
+			system("clear");
+			switch(isHIT(power,distance)){
 				case status::HIT_FRONT:
 					for(int i = 0; i<timeup_front; i++){ 
 						ShowGame(1,1,1,character::DOG);
@@ -468,6 +487,8 @@ int game::RunGame(){
 					ShowGame(1,1,0,character::DOG);
 					sleep(3);
 					system("clear");
+					distance = rand()%300 +100;
+					CatPlayer.setLife(CatPlayer.getLife()-1);
 					break;
 				case status::HIT_BEHIND:
 					for(int i = 0; i<timeup_behind; i++){ 
@@ -485,7 +506,12 @@ int game::RunGame(){
 					system("clear");
 					break;
 			}
-			switch(status::HITED){
+			srand( time(NULL));
+			int RobotP = rand()%30+10;
+			ShowGame(1,0,0,character::CAT);
+			sleep(3);
+			system("clear");
+			switch(isHIT(RobotP,distance)){
 				case status::HIT_FRONT:
 					for(int i = 0; i<timeup_front; i++){ 
 						ShowGame(1,1,1,character::CAT);
@@ -515,6 +541,8 @@ int game::RunGame(){
 					ShowGame(1,1,0,character::CAT);
 					sleep(3);
 					system("clear");
+					distance = rand() %300+100; 
+					DogPlayer.setLife(DogPlayer.getLife()-1);
 					break;
 				case status::HIT_BEHIND:
 					for(int i = 0; i<timeup_behind; i++){ 
@@ -530,12 +558,16 @@ int game::RunGame(){
 					break;
 			}
 			system("clear");
-			return 0;
+			return 1;
+		/*
 		case 2:
 			system("clear");
-			return 0;
+			return 2;
+		*
+		* /
 		case 3:
-			return 1;
+			return 0;
+		*/
 	}
 }
 
@@ -545,6 +577,7 @@ void game::StartGame(){
 	Color::Modifier bgblack(Color::BG_BLACK);
 	Color::Modifier bgblue(Color::BG_BLUE);
 	system("clear");
+	distance = rand()%300 +100;
 	for(int i = 0; i<Map_Height; i++){
 		for(int j = 0; j<Map_Width; j++){
 			if(StartPic[i][j] == '*') std::cout<<bgwhite<<" "<<bgdef;
@@ -558,8 +591,9 @@ void game::StartGame(){
 	system("clear");
 	//INPUT START PIC
 	system("clear");
-	bool isend =false;
-	while(!isend){
+	bool isend =true;
+	while(isend){
+		if(isend == 2)StartGame();
 		isend = RunGame();
 	}
 	system("clear");

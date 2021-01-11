@@ -1,4 +1,4 @@
-# Cat Dog Battle  
+## Cat Dog Battle  
   
   
 
@@ -31,6 +31,19 @@ The interface which we win this game
   
   
 The interface which we lose this game  
+  
+  
+# Authors who make this game  
+ 
+吳昀倫  
+
+呂宜學  
+
+吳祐瑋  
+  
+陶亮清
+
+陳冠全  
   
   
   

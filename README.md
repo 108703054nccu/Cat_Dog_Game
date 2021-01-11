@@ -1,5 +1,19 @@
 # Cat Dog Battle  
+  
+  
 
+Introduction of this Game  
+  
+  
+  
+How to Play this Game  
+  
+  
+  
+  
+# All interfaces in this Game  
+  
+ 
 The interface which go into to this game  
   
   

@@ -15,7 +15,8 @@ namespace Color {
         BG_DEFAULT  = 49,
 	BG_WHITE = 107,
 	BG_LIGHT_GREEN = 102,
-	BG_BLACK = 40
+	BG_BLACK = 40,
+	BG_PURPLE = 45
     };
     class Modifier {
         Code code;

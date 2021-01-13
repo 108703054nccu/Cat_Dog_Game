@@ -22,11 +22,10 @@ game::game(){
 game::~game(){;}
 
 void game::ShowGame( bool isget, bool isshot, bool isup, character c){
+	Color::Modifier bgpurple(Color::BG_PURPLE);
+	Color::Modifier bgdef(Color::BG_DEFAULT);
 	if(!isget){
-		for(int j = 0; j<Map_Width+2; j++)std::cout<<"-";
-		std::cout<<std::endl;
 		for(int y = 0; y<Map_Height; y++){
-			std::cout<<"|";
 			for(int x = 0; x<Map_Width; x++){
 				if(x>=DogPlayer.getOPositionX() && \
 						x<DogPlayer.getOPositionX()+DogWidth && \
@@ -42,21 +41,15 @@ void game::ShowGame( bool isget, bool isshot, bool isup, character c){
 						CatPlayer.ShowPic(y-CatPlayer.getOPositionY(), \
 								x-CatPlayer.getOPositionX(), 0);
 					}
-				else std::cout<<GamePic[y][x];
+				else std::cout<<bgpurple<<GamePic[y][x]<<bgdef;
 			}
-			std::cout<<"|";
 			std::cout<<std::endl;
 		}
-		for(int j = 0; j<Map_Width+2; j++)std::cout<<"-";
-		std::cout<<std::endl;
 		return ;
 	}
 	if(!isshot){
 		if(c == character::DOG){
-			for(int j = 0; j<Map_Width+2; j++)std::cout<<"-";
-			std::cout<<std::endl;
 			for(int y = 0; y<Map_Height; y++){
-				std::cout<<"|";
 				for(int x = 0; x<Map_Width; x++){
 					if(x>=DogPlayer.getOPositionX() && \
 							x<DogPlayer.getOPositionX()+DogWidth && \
@@ -79,20 +72,14 @@ void game::ShowGame( bool isget, bool isshot, bool isup, character c){
 							CatPlayer.ShowPic(y-CatPlayer.getOPositionY(), \
 									x-CatPlayer.getOPositionX(), 0);
 					}
-					else std::cout<<GamePic[y][x];
+					else std::cout<<bgpurple<<GamePic[y][x]<<bgdef;
 				}
-				std::cout<<"|";
 				std::cout<<std::endl;
 			}
-			for(int j = 0; j<Map_Width+2; j++)std::cout<<"-";
-			std::cout<<std::endl;
 			return ;
 		}
 		if(c == character::CAT){	
-			for(int j = 0; j<Map_Width+2; j++)std::cout<<"-";
-			std::cout<<std::endl;
 			for(int y = 0; y<Map_Height; y++){
-				std::cout<<"|";
 				for(int x = 0; x<Map_Width; x++){
 					if(x>=DogPlayer.getOPositionX() && \
 							x<DogPlayer.getOPositionX()+DogWidth && \
@@ -115,20 +102,15 @@ void game::ShowGame( bool isget, bool isshot, bool isup, character c){
 							FishObject.ShowPic(y-FishObject.getOPositionY(), \
 									x-FishObject.getOPositionX(), 0);
 					}
-					else std::cout<<GamePic[y][x];
+					else std::cout<<bgpurple<<GamePic[y][x]<<bgdef;
 				}
-				std::cout<<"|";
 				std::cout<<std::endl;
 			}
-			for(int j = 0; j<Map_Width+2; j++)std::cout<<"-";
-			std::cout<<std::endl;
 			return ;
 		}
 	}
 	if(isup){
 		if(c == character::DOG){	
-			for(int j = 0; j<Map_Width+2; j++)std::cout<<"-";
-			std::cout<<std::endl;
 			StoneObject.setOPosition(StoneObject.getOPositionX()+2,\
 					StoneObject.getOPositionY()-1);
 			for(int y = 0; y<Map_Height; y++){
@@ -155,20 +137,15 @@ void game::ShowGame( bool isget, bool isshot, bool isup, character c){
 							CatPlayer.ShowPic(y-CatPlayer.getOPositionY(), \
 									x-CatPlayer.getOPositionX(), 0);
 					}
-					else std::cout<<GamePic[y][x];
+					else std::cout<<bgpurple<<GamePic[y][x]<<bgdef;
 				}
-				std::cout<<"|";
 				std::cout<<std::endl;
 			}	
-			for(int j = 0; j<Map_Width+2; j++)std::cout<<"-";
-			std::cout<<std::endl;
 			return ;
 		}
 		if(c == character::CAT){
 			FishObject.setOPosition(FishObject.getOPositionX()-2,\
 					FishObject.getOPositionY()-1);	
-			for(int j = 0; j<Map_Width+2; j++)std::cout<<"-";
-			std::cout<<std::endl;
 			for(int y = 0; y<Map_Height; y++){
 				std::cout<<"|";
 				for(int x = 0; x<Map_Width; x++){
@@ -193,13 +170,10 @@ void game::ShowGame( bool isget, bool isshot, bool isup, character c){
 							CatPlayer.ShowPic(y-CatPlayer.getOPositionY(), \
 									x-CatPlayer.getOPositionX(), 0);
 					}
-					else std::cout<<GamePic[y][x];
+					else std::cout<<bgpurple<<GamePic[y][x]<<bgdef;
 				}
-				std::cout<<"|";
 				std::cout<<std::endl;
 			}
-			for(int j = 0; j<Map_Width+2; j++)std::cout<<"-";
-			std::cout<<std::endl;
 			return ;
 		}
 	}
@@ -224,10 +198,7 @@ void game::ShowGame( bool isget, bool isshot, bool isup, character c){
 				StoneObject.setOPosition(StoneObject.getOPositionX()+2,\
 						StoneObject.getOPositionY()+1);
 			}
-			for(int j = 0; j<Map_Width+2; j++)std::cout<<"-";
-			std::cout<<std::endl;
 			for(int y = 0; y<Map_Height; y++){
-				std::cout<<"|";
 				for(int x = 0; x<Map_Width; x++){
 					if(x>=DogPlayer.getOPositionX() && \
 							x<DogPlayer.getOPositionX()+DogWidth && \
@@ -250,13 +221,10 @@ void game::ShowGame( bool isget, bool isshot, bool isup, character c){
 							CatPlayer.ShowPic(y-CatPlayer.getOPositionY(), \
 									x-CatPlayer.getOPositionX(), changeCharacter);
 					}
-					else std::cout<<GamePic[y][x];
+					else std::cout<<bgpurple<<GamePic[y][x]<<bgdef;
 				}
-				std::cout<<"|";
 				std::cout<<std::endl;
 			}	
-			for(int j = 0; j<Map_Width+2; j++)std::cout<<"-";
-			std::cout<<std::endl;
 			changeCharacter = false;
 			changeThrow_o = false;
 			return ;
@@ -278,10 +246,7 @@ void game::ShowGame( bool isget, bool isshot, bool isup, character c){
 				FishObject.setOPosition(FishObject.getOPositionX()-2,\
 						FishObject.getOPositionY()+1);
 			}
-			for(int j = 0; j<Map_Width+2; j++)std::cout<<"-";
-			std::cout<<std::endl;
 			for(int y = 0; y<Map_Height; y++){
-				std::cout<<"|";
 				for(int x = 0; x<Map_Width; x++){
 					if(x>=FishObject.getOPositionX() && \
 							x<FishObject.getOPositionX()+FishWidth && \
@@ -305,13 +270,10 @@ void game::ShowGame( bool isget, bool isshot, bool isup, character c){
 							CatPlayer.ShowPic(y-CatPlayer.getOPositionY(), \
 									x-CatPlayer.getOPositionX(), 0);
 					}
-					else std::cout<<GamePic[y][x];
+					else std::cout<<bgpurple<<GamePic[y][x]<<bgdef;
 				}
-				std::cout<<"|";
 				std::cout<<std::endl;
 			}
-			for(int j = 0; j<Map_Width+2; j++)std::cout<<"-";
-			std::cout<<std::endl;
 			changeCharacter = false;
 			changeCharacter = false;
 			return ;

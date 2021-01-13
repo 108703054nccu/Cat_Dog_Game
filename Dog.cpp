@@ -7,13 +7,13 @@ dog::dog():player(){
 dog::~dog(){;}
 
 void dog::ShowPic(int Height,int Width,bool ishit){
-	Color::Modifier bg_def(Color::BG_DEFAULT);
-	Color::Modifier bg_white(Color::BG_WHITE);
-	Color::Modifier bg_red(Color::BG_RED);
-	Color::Modifier bg_black(Color::BG_BLACK);
-	Color::Modifier bg_purple(Color::BG_PURPLE);
-	if(Dog[ishit][Height][Width] == '*')std::cout<<bg_white<<" "<<bg_def;
-	else if(Dog[ishit][Height][Width] == 'a')std::cout<<bg_black<<" "<<bg_def;
-	else if(Dog[ishit][Height][Width] == 'x')std::cout<<bg_white<<"X"<<bg_def;
-	else std::cout<<bg_purple<<" "<<bg_def;
+	Color::Modifier bgdef(Color::BG_DEFAULT);
+	Color::Modifier bgwhite(Color::BG_WHITE);
+	Color::Modifier bgred(Color::BG_RED);
+	Color::Modifier bgblack(Color::BG_BLACK);
+	Color::Modifier bgpurple(Color::BG_PURPLE);
+	if(Dog[ishit][Height][Width] == '*')std::cout<<bgwhite<<" "<<bgdef;
+	else if(Dog[ishit][Height][Width] == 'a')std::cout<<bgblack<<" "<<bgdef;
+	else if(Dog[ishit][Height][Width] == 'x')std::cout<<bgred<<" "<<bgdef;
+	else std::cout<<bgpurple<<" "<<bgdef;
 }

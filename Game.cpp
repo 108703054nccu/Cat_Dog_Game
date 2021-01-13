@@ -114,7 +114,6 @@ void game::ShowGame( bool isget, bool isshot, bool isup, character c){
 			StoneObject.setOPosition(StoneObject.getOPositionX()+2,\
 					StoneObject.getOPositionY()-1);
 			for(int y = 0; y<Map_Height; y++){
-				std::cout<<"|";
 				for(int x = 0; x<Map_Width; x++){
 					if(x>=DogPlayer.getOPositionX() && \
 							x<DogPlayer.getOPositionX()+DogWidth && \
@@ -147,7 +146,6 @@ void game::ShowGame( bool isget, bool isshot, bool isup, character c){
 			FishObject.setOPosition(FishObject.getOPositionX()-2,\
 					FishObject.getOPositionY()-1);	
 			for(int y = 0; y<Map_Height; y++){
-				std::cout<<"|";
 				for(int x = 0; x<Map_Width; x++){
 					if(x>=DogPlayer.getOPositionX() && \
 							x<DogPlayer.getOPositionX()+DogWidth && \
@@ -337,37 +335,37 @@ int game::RunGame(){
 				std::cin>>power;
 				system("clear");
 				ShowGame(1,0,0,character::DOG);
-				sleep(3);
+				sleep(1);
 				system("clear");
 				switch(isHIT(power,distance)){
 					case status::HIT_FRONT:
 						for(int i = 0; i<timeup_front; i++){ 
 							ShowGame(1,1,1,character::DOG);
-							sleep(1);
+							sleep(0.99);
 							system("clear");
 						}
 						for(int i = 0; i<timedown_front-1; i++){
 							ShowGame(1,1,0,character::DOG);
-							sleep(1);
+							sleep(0.99);
 							system("clear");
 						}
 						ShowGame(1,1,0,character::DOG);
-						sleep(3);
+						sleep(1);
 						system("clear");
 						break;
 					case status::HITED:
 						for(int i = 0; i<timeup_ed; i++){ 
 							ShowGame(1,1,1,character::DOG);
-							sleep(1);
+							sleep(0.99);
 							system("clear");
 						}
 						for(int i = 0; i<timedown_ed-1; i++){
 							ShowGame(1,1,0,character::DOG);
-							sleep(1);
+							sleep(0.99);
 							system("clear");
 						}
 						ShowGame(1,1,0,character::DOG);
-						sleep(3);
+						sleep(1);
 						system("clear");
 						distance = rand()%300 +100;
 						CatPlayer.setLife(CatPlayer.getLife()-5);
@@ -375,16 +373,16 @@ int game::RunGame(){
 					case status::HIT_BEHIND:
 						for(int i = 0; i<timeup_behind; i++){ 
 							ShowGame(1,1,1,character::DOG);
-							sleep(1);
+							sleep(0.99);
 							system("clear");
 						}
 						for(int i = 0; i<timedown_behind-1; i++){
 							ShowGame(1,1,0,character::DOG);
-							sleep(1);
+							sleep(0.99);
 							system("clear");
 						}
 						ShowGame(1,1,0,character::DOG);
-						sleep(3);
+						sleep(1);
 						system("clear");
 						break;
 				}
@@ -397,31 +395,31 @@ int game::RunGame(){
 					case status::HIT_FRONT:
 						for(int i = 0; i<timeup_front; i++){ 
 							ShowGame(1,1,1,character::CAT);
-							sleep(1);
+							sleep(0.99);
 							system("clear");
 						}
 						for(int i = 0; i<timedown_front-1; i++){
 							ShowGame(1,1,0,character::CAT);
-							sleep(1);
+							sleep(0.99);
 							system("clear");
 						}	
 						ShowGame(1,1,0,character::CAT);
-						sleep(3);
+						sleep(1);
 						system("clear");
 						break;
 					case status::HITED:
 						for(int i = 0; i<timeup_ed; i++){ 
 							ShowGame(1,1,1,character::CAT);
-							sleep(1);
+							sleep(0.99);
 							system("clear");
 						}
 						for(int i = 0; i<timedown_ed-1; i++){
 							ShowGame(1,1,0,character::CAT);
-							sleep(1);
+							sleep(0.99);
 							system("clear");
 						}
 						ShowGame(1,1,0,character::CAT);
-						sleep(3);
+						sleep(1);
 						system("clear");
 						distance = rand() %300+100; 
 						DogPlayer.setLife(DogPlayer.getLife()-5);
@@ -429,12 +427,12 @@ int game::RunGame(){
 					case status::HIT_BEHIND:
 						for(int i = 0; i<timeup_behind; i++){ 
 							ShowGame(1,1,1,character::CAT);
-							sleep(1);
+							sleep(0.99);
 							system("clear");
 						}
 						for(int i = 0; i<timedown_behind; i++){
 							ShowGame(1,1,0,character::CAT);
-							sleep(1);
+							sleep(0.99);
 							system("clear");
 						}
 						break;

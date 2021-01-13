@@ -6,181 +6,9 @@
 #include <unistd.h>
 #include <string>
 #include "Color_m.h"
-#define Map_Height 40
+#include "BackGround.h"
 #define Distance 70
 #define oPosition 20
-#define Map_Width oPosition+Distance+DogWidth+CatWidth+oPosition
-const char StartPic[Map_Height][Map_Width+1]={
-"                                                                                                                                                     ",
-"                       *                                                                                                                             ",
-"                       **                                                                                                                            ",
-"                       *1*                                                                                                                           ",
-"                       *11*                                                                                                                          ",
-"                       *111*                                                                               ********************                      ",
-"                       **111*                                                                          ************************1                     ",
-"                       ***111*                                                                      ***************************11                    ",
-"                       ****111*                                                                    ****************************111                   ",
-"                       *****11*******************                                                 *****************************1111                  ",
-"                       ***************************                                                ****************************111111                 ",
-"                       ****************************                                               ****************************1111111                ",
-"                      ******************************                                              ***************************111111111               ",
-"                    *********************************                                            *******1111*****************1111111111              ",
-"                   ***********************************                                           *******1111****************111111111111             ",
-"                 **********************111**************                                         *******1111****************1111111111111            ",
-"                ************************1111*************                                        ***************************11111111111111           ",
-"               **************************1111*************                                      ****************************111111111111111          ",
-"               ***************************111*************                                      ***************************11111111111111111         ",
-"              ******************************1**************                                     **************************111111111111111111         ",
-"              ********************************************111                         111   ******************************11111111111111111          ",
-"              ********************************************111                         111*********************************111111111111111            ",
-"              ***********************11111111111**********111                         111***********************************111111111                ",
-"              ******************************111************                           *****************************************                      ",
-"               ***************************1*1*************                            *****************************************                      ",
-"               *************************1**1**************                            *****************************************                      ",
-"                **********************1***1**************                              ****************************************                      ",
-"                 ************************1**########**** ###    ######## ######## ##     **########****************************                      ",
-"                  **************************##*****##** ## ##      ##       ##    ##       ##*********************************                       ",
-"                   *************************##*****##* ##   ##     ##       ##    ##       ## ******************************                         ",
-"                     ***********************########  ##     ##    ##       ##    ##       ###### ************************                           ",
-"                        ********************##***  ## #########    ##       ##    ##       ##       ********************                             ",
-"                            ****************##     ## ##     ##    ##       ##    ##       ##         ***************                                ",
-"                                **********  ########  ##     ##    ##       ##    ######## ########      **********                                  ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     "
-};
-const char LostPic[Map_Height][Map_Width+1]={
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                            ******       ***     **     **  ********      *******   **     **  ********  ********    **                              ",
-"                           **    **     ** **    ***    **  **           **     **  **     **  **        **     **   **                              ",
-"                           **          **   **   ****  ***  **           **     **  **     **  **        **     **   **                              ",
-"                           **   ****  **     **  ** *** **  ******       **     **  **     **  ******    ********    **                              ",
-"                           **    **   *********  **  *  **  **           **     **   **   **   **        **   **     **                              ",
-"                           **    **   **     **  **     **  **           **     **    ** **    **        **    **                                    ",
-"                            ******    **     **  **     **  ********      *******      ***     ********  **     **   **                              ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     "
-};
-const char WinPic[Map_Height][Map_Width+1]={
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                           **      **  ****  **    **  **                                                            ",
-"                                                           **  **  **   **   ***   **  **                                                            ",
-"                                                           **  **  **   **   ****  **  **                                                            ",
-"                                                           **  **  **   **   ** ** **  **                                                            ",
-"                                                           **  **  **   **   **  ****  **                                                            ",
-"                                                           **  **  **   **   **   ***                                                                ",
-"                                                            ***  ***   ****  **    **  **                                                            ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     "
-};
-const char WarningPic[Map_Height][Map_Width+1]={
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                             **      **    ***    ********  **    ** **** **    **  ******                                           ",
-"                                             **  **  **   ** **   **     ** ***   **  **  ***   ** **    **                                          ",
-"                                             **  **  **  **   **  **     ** ****  **  **  ****  ** **                                                ",
-"                                             **  **  ** **     ** ********  ** ** **  **  ** ** ** **   ****                                         ",
-"                                             **  **  ** ********* **   **   **  ****  **  **  **** **    **                                          ",
-"                                             **  **  ** **     ** **    **  **   ***  **  **   *** **    **                                          ",
-"                                              ***  ***  **     ** **     ** **    ** **** **    **  ******                                           ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                            Cat and Dog are at it again!                                                             ",
-"                                                                                                                                                     ",
-"                                   It's a windy day and they are throwing stuff at each other until one of them gives up,                            ",
-"                                                                                                                                                     ",
-"                                                      Who's gonna be the winner on this battle?                                                      ",
-"                                                                                                                                                     ",
-"                                                 Input a force number carefully and try to win the game!                                             ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     ",
-"                                                                                                                                                     "
-};
-
-
-
 
 game::game(){
 	DogPlayer.setOPosition(oPosition,Map_Height-DogHeight);
@@ -201,26 +29,20 @@ void game::ShowGame( bool isget, bool isshot, bool isup, character c){
 			std::cout<<"|";
 			for(int x = 0; x<Map_Width; x++){
 				if(x>=DogPlayer.getOPositionX() && \
-						x<DogPlayer.getOPositionX()+DogWidth){
-					if(y>=DogPlayer.getOPositionY() && \
+						x<DogPlayer.getOPositionX()+DogWidth && \
+						y>=DogPlayer.getOPositionY() && \
 							y<DogPlayer.getOPositionY()+DogHeight){
 						DogPlayer.ShowPic(y-DogPlayer.getOPositionY(), \
 								x-DogPlayer.getOPositionX(), 0);
 					}
-					else std::cout<<" ";
-				}
 				else if(x>=CatPlayer.getOPositionX() && \
-						x<CatPlayer.getOPositionX()+CatWidth){
-					if(y>=CatPlayer.getOPositionY() && \
+						x<CatPlayer.getOPositionX()+CatWidth && \
+					y>=CatPlayer.getOPositionY() && \
 							y<CatPlayer.getOPositionY()+CatHeight){
 						CatPlayer.ShowPic(y-CatPlayer.getOPositionY(), \
 								x-CatPlayer.getOPositionX(), 0);
 					}
-					else std::cout<<" ";
-				}
-				else{
-					std::cout<<" ";
-				}
+				else std::cout<<GamePic[y][x];
 			}
 			std::cout<<"|";
 			std::cout<<std::endl;
@@ -237,33 +59,27 @@ void game::ShowGame( bool isget, bool isshot, bool isup, character c){
 				std::cout<<"|";
 				for(int x = 0; x<Map_Width; x++){
 					if(x>=DogPlayer.getOPositionX() && \
-							x<DogPlayer.getOPositionX()+DogWidth){
-						if(y>=DogPlayer.getOPositionY() && \
+							x<DogPlayer.getOPositionX()+DogWidth && \
+							y>=DogPlayer.getOPositionY() && \
 								y<DogPlayer.getOPositionY()+DogHeight){
 							DogPlayer.ShowPic(y-DogPlayer.getOPositionY(), \
 									x-DogPlayer.getOPositionX(), 0);
-						}		
-						else std::cout<<" ";
 					}
 					else if(x>=StoneObject.getOPositionX() && \
-							x<StoneObject.getOPositionX()+StoneWidth){
-						if(y>=StoneObject.getOPositionY() && \
+							x<StoneObject.getOPositionX()+StoneWidth && \
+							y>=StoneObject.getOPositionY() && \
 								y<StoneObject.getOPositionY()+StoneHeight){
 							StoneObject.ShowPic(y-StoneObject.getOPositionY(), \
 									x-StoneObject.getOPositionX(), 0);
-						}		
-						else std::cout<<" ";
 					}
 					else if(x>=CatPlayer.getOPositionX() && \
-							x<CatPlayer.getOPositionX()+CatWidth){
-						if(y>=CatPlayer.getOPositionY() && \
+							x<CatPlayer.getOPositionX()+CatWidth &&\
+							y>=CatPlayer.getOPositionY() && \
 								y<CatPlayer.getOPositionY()+CatHeight){
 							CatPlayer.ShowPic(y-CatPlayer.getOPositionY(), \
 									x-CatPlayer.getOPositionX(), 0);
-						}
-						else std::cout<<" ";
 					}
-					else std::cout<<" ";
+					else std::cout<<GamePic[y][x];
 				}
 				std::cout<<"|";
 				std::cout<<std::endl;
@@ -279,35 +95,27 @@ void game::ShowGame( bool isget, bool isshot, bool isup, character c){
 				std::cout<<"|";
 				for(int x = 0; x<Map_Width; x++){
 					if(x>=DogPlayer.getOPositionX() && \
-							x<DogPlayer.getOPositionX()+DogWidth){
-						if(y>=DogPlayer.getOPositionY() && \
+							x<DogPlayer.getOPositionX()+DogWidth && \
+							y>=DogPlayer.getOPositionY() && \
 								y<DogPlayer.getOPositionY()+DogHeight){
 							DogPlayer.ShowPic(y-DogPlayer.getOPositionY(), \
 									x-DogPlayer.getOPositionX(), 0);
-						}
-						else std::cout<<" ";
 					}
 					else if(x>=CatPlayer.getOPositionX() && \
-							x<CatPlayer.getOPositionX()+CatWidth){
-						if(y>=CatPlayer.getOPositionY() && \
+							x<CatPlayer.getOPositionX()+CatWidth  && \
+						y>=CatPlayer.getOPositionY() && \
 								y<CatPlayer.getOPositionY()+CatHeight){
 							CatPlayer.ShowPic(y-CatPlayer.getOPositionY(), \
 									x-CatPlayer.getOPositionX(), 0);
-						}
-						else std::cout<<" ";
-
 					}
 					else if(x>=FishObject.getOPositionX() && \
-							x<FishObject.getOPositionX()+FishWidth){
-						if(y>=FishObject.getOPositionY() && \
+							x<FishObject.getOPositionX()+FishWidth && \
+							y>=FishObject.getOPositionY() && \
 								y<FishObject.getOPositionY()+FishHeight){
 							FishObject.ShowPic(y-FishObject.getOPositionY(), \
 									x-FishObject.getOPositionX(), 0);
-						}
-						else std::cout<<" ";
-
 					}
-					else std::cout<<" ";
+					else std::cout<<GamePic[y][x];
 				}
 				std::cout<<"|";
 				std::cout<<std::endl;
@@ -327,33 +135,27 @@ void game::ShowGame( bool isget, bool isshot, bool isup, character c){
 				std::cout<<"|";
 				for(int x = 0; x<Map_Width; x++){
 					if(x>=DogPlayer.getOPositionX() && \
-							x<DogPlayer.getOPositionX()+DogWidth){
-						if(y>=DogPlayer.getOPositionY() && \
+							x<DogPlayer.getOPositionX()+DogWidth && \
+							y>=DogPlayer.getOPositionY() && \
 								y<DogPlayer.getOPositionY()+DogHeight){
 							DogPlayer.ShowPic(y-DogPlayer.getOPositionY(), \
 									x-DogPlayer.getOPositionX(), 0);
-						}		
-						else std::cout<<" ";
 					}
 					else if(x>=StoneObject.getOPositionX() && \
-							x<StoneObject.getOPositionX()+StoneWidth){
-						if(y>=StoneObject.getOPositionY() && \
+							x<StoneObject.getOPositionX()+StoneWidth && \
+							y>=StoneObject.getOPositionY() && \
 								y<StoneObject.getOPositionY()+StoneHeight){
 							StoneObject.ShowPic(y-StoneObject.getOPositionY(),\
 									x-StoneObject.getOPositionX(), 0);
-						}
-						else std::cout<<" ";
 					}
 					else if(x>=CatPlayer.getOPositionX() && \
-							x<CatPlayer.getOPositionX()+CatWidth){
-						if(y>=CatPlayer.getOPositionY() && \
+							x<CatPlayer.getOPositionX()+CatWidth && \
+							y>=CatPlayer.getOPositionY() && \
 								y<CatPlayer.getOPositionY()+CatHeight){
 							CatPlayer.ShowPic(y-CatPlayer.getOPositionY(), \
 									x-CatPlayer.getOPositionX(), 0);
-						}
-						else std::cout<<" ";
 					}
-					else std::cout<<" ";
+					else std::cout<<GamePic[y][x];
 				}
 				std::cout<<"|";
 				std::cout<<std::endl;
@@ -371,33 +173,27 @@ void game::ShowGame( bool isget, bool isshot, bool isup, character c){
 				std::cout<<"|";
 				for(int x = 0; x<Map_Width; x++){
 					if(x>=DogPlayer.getOPositionX() && \
-							x<DogPlayer.getOPositionX()+DogWidth){
-						if(y>=DogPlayer.getOPositionY() && \
+							x<DogPlayer.getOPositionX()+DogWidth && \
+							y>=DogPlayer.getOPositionY() && \
 								y<DogPlayer.getOPositionY()+DogHeight){
 							DogPlayer.ShowPic(y-DogPlayer.getOPositionY(), \
 									x-DogPlayer.getOPositionX(), 0);
-						}		
-						else std::cout<<" ";
 					}
 					else if(x>=FishObject.getOPositionX() && \
-							x<FishObject.getOPositionX()+FishWidth){
-						if(y>=FishObject.getOPositionY() && \
+							x<FishObject.getOPositionX()+FishWidth && \
+							y>=FishObject.getOPositionY() && \
 								y<FishObject.getOPositionY()+FishHeight ){
 							FishObject.ShowPic(y-FishObject.getOPositionY(),\
 									x-FishObject.getOPositionX(), 0);
-						}
-						else std::cout<<" ";
 					}
 					else if(x>=CatPlayer.getOPositionX() && \
-							x<CatPlayer.getOPositionX()+CatWidth){
-						if(y>=CatPlayer.getOPositionY() && \
+							x<CatPlayer.getOPositionX()+CatWidth && \
+							y>=CatPlayer.getOPositionY() && \
 								y<CatPlayer.getOPositionY()+CatHeight){
 							CatPlayer.ShowPic(y-CatPlayer.getOPositionY(), \
 									x-CatPlayer.getOPositionX(), 0);
-						}
-						else std::cout<<" ";
 					}
-					else std::cout<<" ";
+					else std::cout<<GamePic[y][x];
 				}
 				std::cout<<"|";
 				std::cout<<std::endl;
@@ -434,33 +230,27 @@ void game::ShowGame( bool isget, bool isshot, bool isup, character c){
 				std::cout<<"|";
 				for(int x = 0; x<Map_Width; x++){
 					if(x>=DogPlayer.getOPositionX() && \
-							x<DogPlayer.getOPositionX()+DogWidth){
-						if(y>=DogPlayer.getOPositionY() && \
+							x<DogPlayer.getOPositionX()+DogWidth && \
+							y>=DogPlayer.getOPositionY() && \
 								y<DogPlayer.getOPositionY()+DogHeight){
 							DogPlayer.ShowPic(y-DogPlayer.getOPositionY(), \
 									x-DogPlayer.getOPositionX(), 0);
-						}		
-						else std::cout<<" ";
 					}
 					else if(x>=StoneObject.getOPositionX() && \
-							x<StoneObject.getOPositionX()+StoneWidth){
-						if(y>=StoneObject.getOPositionY() && \
+							x<StoneObject.getOPositionX()+StoneWidth && \
+							y>=StoneObject.getOPositionY() && \
 								y<StoneObject.getOPositionY()+StoneHeight ){
 							StoneObject.ShowPic(y-StoneObject.getOPositionY(),\
 									x-StoneObject.getOPositionX(), changeThrow_o);
-						}
-						else std::cout<<" ";
 					}
 					else if(x>=CatPlayer.getOPositionX() && \
-							x<CatPlayer.getOPositionX()+CatWidth){
-						if(y>=CatPlayer.getOPositionY() && \
+							x<CatPlayer.getOPositionX()+CatWidth && \
+							y>=CatPlayer.getOPositionY() && \
 								y<CatPlayer.getOPositionY()+CatHeight){
 							CatPlayer.ShowPic(y-CatPlayer.getOPositionY(), \
 									x-CatPlayer.getOPositionX(), changeCharacter);
-						}
-						else std::cout<<" ";
 					}
-					else std::cout<<" ";
+					else std::cout<<GamePic[y][x];
 				}
 				std::cout<<"|";
 				std::cout<<std::endl;
@@ -494,34 +284,28 @@ void game::ShowGame( bool isget, bool isshot, bool isup, character c){
 				std::cout<<"|";
 				for(int x = 0; x<Map_Width; x++){
 					if(x>=FishObject.getOPositionX() && \
-							x<FishObject.getOPositionX()+FishWidth){
-						if(y>=FishObject.getOPositionY() && \
+							x<FishObject.getOPositionX()+FishWidth && \
+							y>=FishObject.getOPositionY() && \
 								y<FishObject.getOPositionY()+FishHeight ){
 							FishObject.ShowPic(y-FishObject.getOPositionY(),\
 									x-FishObject.getOPositionX(), changeThrow_o);
-						}		
-						else std::cout<<" ";
 					}
 
 					else if(x>=DogPlayer.getOPositionX() && \
-							x<DogPlayer.getOPositionX()+DogWidth){
-						if(y>=DogPlayer.getOPositionY() && \
+							x<DogPlayer.getOPositionX()+DogWidth && \
+							y>=DogPlayer.getOPositionY() && \
 								y<DogPlayer.getOPositionY()+DogHeight){
 							DogPlayer.ShowPic(y-DogPlayer.getOPositionY(), \
 									x-DogPlayer.getOPositionX(), changeCharacter);
-						}		
-						else std::cout<<" ";
 					}
 					else if(x>=CatPlayer.getOPositionX() && \
-							x<CatPlayer.getOPositionX()+CatWidth){
-						if(y>=CatPlayer.getOPositionY() && \
+							x<CatPlayer.getOPositionX()+CatWidth && \
+							y>=CatPlayer.getOPositionY() && \
 								y<CatPlayer.getOPositionY()+CatHeight){
 							CatPlayer.ShowPic(y-CatPlayer.getOPositionY(), \
 									x-CatPlayer.getOPositionX(), 0);
-						}
-						else std::cout<<" ";
 					}
-					else std::cout<<" ";
+					else std::cout<<GamePic[y][x];
 				}
 				std::cout<<"|";
 				std::cout<<std::endl;

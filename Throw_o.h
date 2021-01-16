@@ -21,6 +21,7 @@ class stone:public throw_o{
 		stone();
 		~stone();
 		void ShowPic(int,int,bool);
+		char getAPixel(int,int,bool);
 	private:
 };
 class fish:public throw_o{
@@ -28,6 +29,7 @@ class fish:public throw_o{
 		fish();
 		~fish();
 		void ShowPic(int,int,bool);
+		char getAPixel(int,int,bool);
 	private:
 };
 #endif // THROW_O_H

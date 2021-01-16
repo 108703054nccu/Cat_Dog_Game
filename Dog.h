@@ -9,7 +9,7 @@ class dog:public player{
 		~dog();
 		void setO_PointX(int);
 		void setO_PointY(int);
-		void ShowPic(int,int,bool);
+		char getAPixel(int,int,bool);
 	private:
 		int O_PointX;
 		int O_PointY;

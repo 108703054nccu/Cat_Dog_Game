@@ -22,6 +22,7 @@ class game{
 		int RunGame();
 		void ShowGame(bool,bool,bool,character);
 		bool IsHit(float,float,int);//target pos, O_throw pos, power, angle 
+		void ShowFrame(std::string);
 		//void setDogPosition(float);
 		//void setCatPosition(float);
 		//float getDogPosition();

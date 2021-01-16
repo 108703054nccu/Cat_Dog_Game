@@ -21,9 +21,23 @@ game::game(){
 
 game::~game(){;}
 
-void game::ShowGame( bool isget, bool isshot, bool isup, character c){
-	Color::Modifier bgpurple(Color::BG_PURPLE);
+void game::ShowFrame(std::string frame){
 	Color::Modifier bgdef(Color::BG_DEFAULT);
+	Color::Modifier bgwhite(Color::BG_WHITE);
+	Color::Modifier bgred(Color::BG_RED);
+	Color::Modifier bgblack(Color::BG_BLACK);
+	Color::Modifier bgpurple(Color::BG_PURPLE);
+	for(int i = 0; i<frame.size() ;i++){
+		if(frame.at(i) == '*') std::cout<<bgwhite<<" "<<bgdef;
+		else if(frame.at(i) == 'a') std::cout<<bgblack<<" "<<bgdef;
+		else if(frame.at(i) == 'x') std::cout<<bgred<<" "<<bgdef;
+		else if(frame.at(i) == ' ') std::cout<<bgpurple<<" "<<bgdef;
+		else std::cout<<frame.at(i);
+	}
+	return;
+}
+void game::ShowGame( bool isget, bool isshot, bool isup, character c){
+	std::string all_Frame;
 	if(!isget){
 		for(int y = 0; y<Map_Height; y++){
 			for(int x = 0; x<Map_Width; x++){
@@ -31,20 +45,22 @@ void game::ShowGame( bool isget, bool isshot, bool isup, character c){
 						x<DogPlayer.getOPositionX()+DogWidth && \
 						y>=DogPlayer.getOPositionY() && \
 							y<DogPlayer.getOPositionY()+DogHeight){
-						DogPlayer.ShowPic(y-DogPlayer.getOPositionY(), \
+						all_Frame+=DogPlayer.getAPixel(y-DogPlayer.getOPositionY(), \
 								x-DogPlayer.getOPositionX(), 0);
 					}
 				else if(x>=CatPlayer.getOPositionX() && \
 						x<CatPlayer.getOPositionX()+CatWidth && \
 					y>=CatPlayer.getOPositionY() && \
 							y<CatPlayer.getOPositionY()+CatHeight){
-						CatPlayer.ShowPic(y-CatPlayer.getOPositionY(), \
+						all_Frame+=CatPlayer.getAPixel(y-CatPlayer.getOPositionY(), \
 								x-CatPlayer.getOPositionX(), 0);
 					}
-				else std::cout<<bgpurple<<GamePic[y][x]<<bgdef;
+				else all_Frame+=GamePic[y][x];
 			}
-			std::cout<<std::endl;
+			all_Frame+='\n';
 		}
+		ShowFrame(all_Frame);
+		all_Frame.clear();
 		return ;
 	}
 	if(!isshot){
@@ -55,27 +71,29 @@ void game::ShowGame( bool isget, bool isshot, bool isup, character c){
 							x<DogPlayer.getOPositionX()+DogWidth && \
 							y>=DogPlayer.getOPositionY() && \
 								y<DogPlayer.getOPositionY()+DogHeight){
-							DogPlayer.ShowPic(y-DogPlayer.getOPositionY(), \
+							all_Frame+=DogPlayer.getAPixel(y-DogPlayer.getOPositionY(), \
 									x-DogPlayer.getOPositionX(), 0);
 					}
 					else if(x>=StoneObject.getOPositionX() && \
 							x<StoneObject.getOPositionX()+StoneWidth && \
 							y>=StoneObject.getOPositionY() && \
 								y<StoneObject.getOPositionY()+StoneHeight){
-							StoneObject.ShowPic(y-StoneObject.getOPositionY(), \
+							all_Frame+=StoneObject.getAPixel(y-StoneObject.getOPositionY(), \
 									x-StoneObject.getOPositionX(), 0);
 					}
 					else if(x>=CatPlayer.getOPositionX() && \
 							x<CatPlayer.getOPositionX()+CatWidth &&\
 							y>=CatPlayer.getOPositionY() && \
 								y<CatPlayer.getOPositionY()+CatHeight){
-							CatPlayer.ShowPic(y-CatPlayer.getOPositionY(), \
+							all_Frame+=CatPlayer.getAPixel(y-CatPlayer.getOPositionY(), \
 									x-CatPlayer.getOPositionX(), 0);
 					}
-					else std::cout<<bgpurple<<GamePic[y][x]<<bgdef;
+					else all_Frame+=GamePic[y][x];
 				}
-				std::cout<<std::endl;
-			}
+				all_Frame+='\n';
+			}	
+			ShowFrame(all_Frame);
+			all_Frame.clear();
 			return ;
 		}
 		if(c == character::CAT){	
@@ -85,27 +103,29 @@ void game::ShowGame( bool isget, bool isshot, bool isup, character c){
 							x<DogPlayer.getOPositionX()+DogWidth && \
 							y>=DogPlayer.getOPositionY() && \
 								y<DogPlayer.getOPositionY()+DogHeight){
-							DogPlayer.ShowPic(y-DogPlayer.getOPositionY(), \
+							all_Frame+=DogPlayer.getAPixel(y-DogPlayer.getOPositionY(), \
 									x-DogPlayer.getOPositionX(), 0);
 					}
 					else if(x>=CatPlayer.getOPositionX() && \
 							x<CatPlayer.getOPositionX()+CatWidth  && \
 						y>=CatPlayer.getOPositionY() && \
 								y<CatPlayer.getOPositionY()+CatHeight){
-							CatPlayer.ShowPic(y-CatPlayer.getOPositionY(), \
+							all_Frame+=CatPlayer.getAPixel(y-CatPlayer.getOPositionY(), \
 									x-CatPlayer.getOPositionX(), 0);
 					}
 					else if(x>=FishObject.getOPositionX() && \
 							x<FishObject.getOPositionX()+FishWidth && \
 							y>=FishObject.getOPositionY() && \
 								y<FishObject.getOPositionY()+FishHeight){
-							FishObject.ShowPic(y-FishObject.getOPositionY(), \
+							all_Frame+=FishObject.getAPixel(y-FishObject.getOPositionY(), \
 									x-FishObject.getOPositionX(), 0);
 					}
-					else std::cout<<bgpurple<<GamePic[y][x]<<bgdef;
+					else all_Frame+=GamePic[y][x];
 				}
-				std::cout<<std::endl;
-			}
+				all_Frame+='\n';
+			}	
+			ShowFrame(all_Frame);
+			all_Frame.clear();
 			return ;
 		}
 	}
@@ -119,27 +139,29 @@ void game::ShowGame( bool isget, bool isshot, bool isup, character c){
 							x<DogPlayer.getOPositionX()+DogWidth && \
 							y>=DogPlayer.getOPositionY() && \
 								y<DogPlayer.getOPositionY()+DogHeight){
-							DogPlayer.ShowPic(y-DogPlayer.getOPositionY(), \
+							all_Frame+=DogPlayer.getAPixel(y-DogPlayer.getOPositionY(), \
 									x-DogPlayer.getOPositionX(), 0);
 					}
 					else if(x>=StoneObject.getOPositionX() && \
 							x<StoneObject.getOPositionX()+StoneWidth && \
 							y>=StoneObject.getOPositionY() && \
 								y<StoneObject.getOPositionY()+StoneHeight){
-							StoneObject.ShowPic(y-StoneObject.getOPositionY(),\
+							all_Frame+=StoneObject.getAPixel(y-StoneObject.getOPositionY(),\
 									x-StoneObject.getOPositionX(), 0);
 					}
 					else if(x>=CatPlayer.getOPositionX() && \
 							x<CatPlayer.getOPositionX()+CatWidth && \
 							y>=CatPlayer.getOPositionY() && \
 								y<CatPlayer.getOPositionY()+CatHeight){
-							CatPlayer.ShowPic(y-CatPlayer.getOPositionY(), \
+							all_Frame+=CatPlayer.getAPixel(y-CatPlayer.getOPositionY(), \
 									x-CatPlayer.getOPositionX(), 0);
 					}
-					else std::cout<<bgpurple<<GamePic[y][x]<<bgdef;
+					else all_Frame+=GamePic[y][x];
 				}
-				std::cout<<std::endl;
-			}	
+				all_Frame+='\n';
+			}		
+			ShowFrame(all_Frame);
+			all_Frame.clear();
 			return ;
 		}
 		if(c == character::CAT){
@@ -151,27 +173,29 @@ void game::ShowGame( bool isget, bool isshot, bool isup, character c){
 							x<DogPlayer.getOPositionX()+DogWidth && \
 							y>=DogPlayer.getOPositionY() && \
 								y<DogPlayer.getOPositionY()+DogHeight){
-							DogPlayer.ShowPic(y-DogPlayer.getOPositionY(), \
+							all_Frame+=DogPlayer.getAPixel(y-DogPlayer.getOPositionY(), \
 									x-DogPlayer.getOPositionX(), 0);
 					}
 					else if(x>=FishObject.getOPositionX() && \
 							x<FishObject.getOPositionX()+FishWidth && \
 							y>=FishObject.getOPositionY() && \
 								y<FishObject.getOPositionY()+FishHeight ){
-							FishObject.ShowPic(y-FishObject.getOPositionY(),\
+							all_Frame+=FishObject.getAPixel(y-FishObject.getOPositionY(),\
 									x-FishObject.getOPositionX(), 0);
 					}
 					else if(x>=CatPlayer.getOPositionX() && \
 							x<CatPlayer.getOPositionX()+CatWidth && \
 							y>=CatPlayer.getOPositionY() && \
 								y<CatPlayer.getOPositionY()+CatHeight){
-							CatPlayer.ShowPic(y-CatPlayer.getOPositionY(), \
+							all_Frame+=CatPlayer.getAPixel(y-CatPlayer.getOPositionY(), \
 									x-CatPlayer.getOPositionX(), 0);
 					}
-					else std::cout<<bgpurple<<GamePic[y][x]<<bgdef;
+					else all_Frame+=GamePic[y][x];
 				}
-				std::cout<<std::endl;
-			}
+				all_Frame+='\n';
+			}	
+			ShowFrame(all_Frame);
+			all_Frame.clear();
 			return ;
 		}
 	}
@@ -202,29 +226,31 @@ void game::ShowGame( bool isget, bool isshot, bool isup, character c){
 							x<DogPlayer.getOPositionX()+DogWidth && \
 							y>=DogPlayer.getOPositionY() && \
 								y<DogPlayer.getOPositionY()+DogHeight){
-							DogPlayer.ShowPic(y-DogPlayer.getOPositionY(), \
+							all_Frame+=DogPlayer.getAPixel(y-DogPlayer.getOPositionY(), \
 									x-DogPlayer.getOPositionX(), 0);
 					}
 					else if(x>=StoneObject.getOPositionX() && \
 							x<StoneObject.getOPositionX()+StoneWidth && \
 							y>=StoneObject.getOPositionY() && \
 								y<StoneObject.getOPositionY()+StoneHeight ){
-							StoneObject.ShowPic(y-StoneObject.getOPositionY(),\
+							all_Frame+=StoneObject.getAPixel(y-StoneObject.getOPositionY(),\
 									x-StoneObject.getOPositionX(), changeThrow_o);
 					}
 					else if(x>=CatPlayer.getOPositionX() && \
 							x<CatPlayer.getOPositionX()+CatWidth && \
 							y>=CatPlayer.getOPositionY() && \
 								y<CatPlayer.getOPositionY()+CatHeight){
-							CatPlayer.ShowPic(y-CatPlayer.getOPositionY(), \
+							all_Frame+=CatPlayer.getAPixel(y-CatPlayer.getOPositionY(), \
 									x-CatPlayer.getOPositionX(), changeCharacter);
 					}
-					else std::cout<<bgpurple<<GamePic[y][x]<<bgdef;
+					else all_Frame+=GamePic[y][x];
 				}
-				std::cout<<std::endl;
-			}	
+				all_Frame+='\n';
+			}
+			ShowFrame(all_Frame);
 			changeCharacter = false;
 			changeThrow_o = false;
+			all_Frame.clear();
 			return ;
 		}
 		if(c == character::CAT){
@@ -250,7 +276,7 @@ void game::ShowGame( bool isget, bool isshot, bool isup, character c){
 							x<FishObject.getOPositionX()+FishWidth && \
 							y>=FishObject.getOPositionY() && \
 								y<FishObject.getOPositionY()+FishHeight ){
-							FishObject.ShowPic(y-FishObject.getOPositionY(),\
+							all_Frame+=FishObject.getAPixel(y-FishObject.getOPositionY(),\
 									x-FishObject.getOPositionX(), changeThrow_o);
 					}
 
@@ -258,22 +284,24 @@ void game::ShowGame( bool isget, bool isshot, bool isup, character c){
 							x<DogPlayer.getOPositionX()+DogWidth && \
 							y>=DogPlayer.getOPositionY() && \
 								y<DogPlayer.getOPositionY()+DogHeight){
-							DogPlayer.ShowPic(y-DogPlayer.getOPositionY(), \
+							all_Frame+=DogPlayer.getAPixel(y-DogPlayer.getOPositionY(), \
 									x-DogPlayer.getOPositionX(), changeCharacter);
 					}
 					else if(x>=CatPlayer.getOPositionX() && \
 							x<CatPlayer.getOPositionX()+CatWidth && \
 							y>=CatPlayer.getOPositionY() && \
 								y<CatPlayer.getOPositionY()+CatHeight){
-							CatPlayer.ShowPic(y-CatPlayer.getOPositionY(), \
+							all_Frame+=CatPlayer.getAPixel(y-CatPlayer.getOPositionY(), \
 									x-CatPlayer.getOPositionX(), 0);
 					}
-					else std::cout<<bgpurple<<GamePic[y][x]<<bgdef;
+					else all_Frame+=GamePic[y][x];
 				}
-				std::cout<<std::endl;
+				all_Frame+='\n';
 			}
+			ShowFrame(all_Frame);
 			changeCharacter = false;
 			changeCharacter = false;
+			all_Frame.clear();
 			return ;
 		}
 
@@ -341,12 +369,12 @@ int game::RunGame(){
 					case status::HIT_FRONT:
 						for(int i = 0; i<timeup_front; i++){ 
 							ShowGame(1,1,1,character::DOG);
-							sleep(0.99);
+							sleep(0.999999);
 							system("clear");
 						}
 						for(int i = 0; i<timedown_front-1; i++){
 							ShowGame(1,1,0,character::DOG);
-							sleep(0.99);
+							sleep(0.999999);
 							system("clear");
 						}
 						ShowGame(1,1,0,character::DOG);
@@ -356,12 +384,12 @@ int game::RunGame(){
 					case status::HITED:
 						for(int i = 0; i<timeup_ed; i++){ 
 							ShowGame(1,1,1,character::DOG);
-							sleep(0.99);
+							sleep(0.999999);
 							system("clear");
 						}
 						for(int i = 0; i<timedown_ed-1; i++){
 							ShowGame(1,1,0,character::DOG);
-							sleep(0.99);
+							sleep(0.999999);
 							system("clear");
 						}
 						ShowGame(1,1,0,character::DOG);
@@ -373,12 +401,12 @@ int game::RunGame(){
 					case status::HIT_BEHIND:
 						for(int i = 0; i<timeup_behind; i++){ 
 							ShowGame(1,1,1,character::DOG);
-							sleep(0.99);
+							sleep(0.999999);
 							system("clear");
 						}
 						for(int i = 0; i<timedown_behind-1; i++){
 							ShowGame(1,1,0,character::DOG);
-							sleep(0.99);
+							sleep(0.999999);
 							system("clear");
 						}
 						ShowGame(1,1,0,character::DOG);
@@ -395,12 +423,12 @@ int game::RunGame(){
 					case status::HIT_FRONT:
 						for(int i = 0; i<timeup_front; i++){ 
 							ShowGame(1,1,1,character::CAT);
-							sleep(0.99);
+							sleep(0.999999);
 							system("clear");
 						}
 						for(int i = 0; i<timedown_front-1; i++){
 							ShowGame(1,1,0,character::CAT);
-							sleep(0.99);
+							sleep(0.999999);
 							system("clear");
 						}	
 						ShowGame(1,1,0,character::CAT);
@@ -410,12 +438,12 @@ int game::RunGame(){
 					case status::HITED:
 						for(int i = 0; i<timeup_ed; i++){ 
 							ShowGame(1,1,1,character::CAT);
-							sleep(0.99);
+							sleep(0.999999);
 							system("clear");
 						}
 						for(int i = 0; i<timedown_ed-1; i++){
 							ShowGame(1,1,0,character::CAT);
-							sleep(0.99);
+							sleep(0.999999);
 							system("clear");
 						}
 						ShowGame(1,1,0,character::CAT);
@@ -427,12 +455,12 @@ int game::RunGame(){
 					case status::HIT_BEHIND:
 						for(int i = 0; i<timeup_behind; i++){ 
 							ShowGame(1,1,1,character::CAT);
-							sleep(0.99);
+							sleep(0.999999);
 							system("clear");
 						}
 						for(int i = 0; i<timedown_behind; i++){
 							ShowGame(1,1,0,character::CAT);
-							sleep(0.99);
+							sleep(0.999999);
 							system("clear");
 						}
 						break;

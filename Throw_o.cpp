@@ -43,6 +43,9 @@ void stone::ShowPic(int height,int width,bool ishit){
 	else std::cout<<bgpurple<<" "<<bgdef;
 }
 
+char stone::getAPixel(int height,int width,bool ishit){
+	return Stone[ishit][height][width]; 
+}
 fish::fish(){;}
 
 fish::~fish(){;}
@@ -54,3 +57,8 @@ void fish::ShowPic(int height, int width, bool ishit){
 	if(Fish[ishit][height][width] == '*')std::cout<<bgwhite<<" "<<bgdef;
 	else std::cout<<bgpurple<<" "<<bgdef;
 }
+
+char fish::getAPixel(int height, int width, bool ishit){
+	return Fish[ishit][height][width]; 
+}
+

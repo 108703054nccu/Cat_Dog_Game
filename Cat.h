@@ -6,7 +6,7 @@ class cat:public player{
 	public:
 		cat();
 		~cat();
-		void ShowPic(int,int,bool);
+		char getAPixel(int,int,bool);
 	private:
 		int O_PositionX;
 		int O_PositionY;

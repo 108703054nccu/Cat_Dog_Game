@@ -2,11 +2,11 @@
   
   
 
-##Introduction of this Game  
+## ntroduction of this Game  
   
   
   
-##How to Play this Game  
+## How to Play this Game  
   
   
   

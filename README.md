@@ -4,8 +4,11 @@
 
 ## Introduction of this Game  
   
-  
-  
+Cat and Dog are at it again!  
+It's a windy day and they are throwing stuff at each other until one of them gives up.  
+Who's gonna be the winner on this battle.  
+Input a force number carefully and try to win the game!  
+
 ## How to Play this Game  
   
 Every Run, Cat Player and Dog Player can throw something at each other.   

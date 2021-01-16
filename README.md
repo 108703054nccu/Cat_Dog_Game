@@ -27,23 +27,23 @@ The interface which gamers play this game
   
   
 The interface which we win this game  
-![Result of game]()
+![Result of game](Win.png)
   
   
 The interface which we lose this game  
-![Result of game]()  
+![Result of game](Lose.png)  
   
 # Authors who make this game  
  
-吳昀倫  
+吳昀倫(Code Editor)
 
-呂宜學  
+呂宜學(BackGround Maker && G-Funtion Maker)  
 
-吳祐瑋  
+吳祐瑋(Topic Maker)  
   
-陶亮清
+陶亮清(Topic Maker)
 
-陳冠全  
+陳冠全(PPT Maker) 
   
   
   

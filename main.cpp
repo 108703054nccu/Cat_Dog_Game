@@ -1,5 +1,4 @@
 #include "Game.h"
-#include "Dog.h"
 #include <iostream>
 using namespace std;
 

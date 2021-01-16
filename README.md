@@ -2,7 +2,7 @@
   
   
 
-## ntroduction of this Game  
+## Introduction of this Game  
   
   
   

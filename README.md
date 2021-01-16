@@ -1,17 +1,17 @@
-## Cat Dog Battle  
+# Cat Dog Battle  
   
   
 
-Introduction of this Game  
+##Introduction of this Game  
   
   
   
-How to Play this Game  
+##How to Play this Game  
   
   
   
   
-# All interfaces in this Game  
+## All interfaces in this Game  
   
  
 The interface which go into to this game  
@@ -33,7 +33,7 @@ The interface which we win this game
 The interface which we lose this game  
 ![Result of game](Lose.png)  
   
-# Authors who make this game  
+## Authors who make this game  
  
 吳昀倫(Code Editor)
 

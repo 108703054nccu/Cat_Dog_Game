@@ -8,11 +8,13 @@
   
 ## How to Play this Game  
   
-每一回合，貓跟狗可以互相朝對方丟躑物品，  
-玩家可以選擇每次攻擊的力道，若攻擊力道符合當時距離，  
-則會擊中對方並使對方血量降低5點，若對方生命值（初始20點）歸零，  
-即取得勝利。  
-每回合開始及每次任一玩家擊中後，貓與狗間的距離會重新隨機產生。  
+Every Run, Cat Player and Dog Player can throw something at each other.   
+Player can decise the power of any run,  
+if power is equal to the result of G-Funtion,
+another Player will change Picture and reduce its life.  
+If the life of anyone is less than zero or equal to zero,  
+This Game is over and show the result.  
+If any run begin or anyone is hitted, the distance between dog and cat will generate randomly.  
   
 ## All Class We use
   
